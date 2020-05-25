@@ -87,4 +87,4 @@ const generateTestDatas = (() => {
   };
 })();
 
-generateTestDatas.init();
+// generateTestDatas.init();

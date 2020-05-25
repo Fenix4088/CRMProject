@@ -18,8 +18,10 @@ const formController = ((ctrlModel, ctrlView) => {
       clientInformation.clientEmail,
       clientInformation.clientCoursType
     );
-    generateTestDatas.init(); //Генерируем тестовые данные клиентов
+
+    // generateTestDatas.init(); //Генерируем тестовые данные клиентов
     ctrlModel.testInit(); //Выводим в консоль данные из массива данных о клиенте
+    ctrlView.clearFields(); //Очишаем поля формы
   }
 
   // Ф-я для сбора информации из формы Заявок
