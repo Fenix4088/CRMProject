@@ -10,7 +10,7 @@ const formController = ((ctrlModel, ctrlView) => {
   function creatRequest(e) {
     e.preventDefault();
     // Собираем значения из формы и записываем их в переменную
-    const clientInformation = collectClienInformation ();
+    const clientInformation = collectClienInformation();
     // Передаем данные по клиенту в модель
     ctrlModel.saveRequestData(
       clientInformation.clientName,
@@ -18,10 +18,12 @@ const formController = ((ctrlModel, ctrlView) => {
       clientInformation.clientEmail,
       clientInformation.clientCoursType
     );
+    generateTestDatas.init(); //Генерируем тестовые данные клиентов
+    ctrlModel.testInit(); //Выводим в консоль данные из массива данных о клиенте
   }
 
-// Ф-я для сбора информации из формы Заявок
-  function collectClienInformation () {
+  // Ф-я для сбора информации из формы Заявок
+  function collectClienInformation() {
     const clientName = document.querySelector(formDOM.fullName).value;
     const clientPhone = document.querySelector(formDOM.phone).value;
     const clientEmail = document.querySelector(formDOM.email).value;
@@ -29,10 +31,10 @@ const formController = ((ctrlModel, ctrlView) => {
 
     return {
       clientName,
-      clientPhone, 
+      clientPhone,
       clientEmail,
-      clientCoursType
-    }
+      clientCoursType,
+    };
   }
 
   return {
@@ -43,4 +45,3 @@ const formController = ((ctrlModel, ctrlView) => {
 })(model, formView);
 
 formController.init();
-
