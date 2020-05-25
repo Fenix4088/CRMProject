@@ -36,8 +36,8 @@
         <form id="main-form" method="POST" action="<?=HOST?>payment-form.php">
           <label>Ваши данные:</label>
           <div class="form-group">
-			<input
-				data-fullname
+            <input
+              data-fullname
               type="text"
               name="name"
               autocomplete="on"
@@ -45,20 +45,40 @@
               placeholder="Имя и Фамилия"
               required
             />
+            <div class="validate validate--name">
+              <div class="validate__icon">
+                <img src="./img/icons/exclamation-circle.svg" alt="icon" width="20">
+
+              </div>
+              <div class="validate__warning">Введите имя и фамилию</div>
+            </div>
           </div>
+
           <div class="form-group">
-			<input
-			data-phone
+            <input
+              data-phone
               type="text"
               name="phone"
               autocomplete="on"
               class="form-control"
               placeholder="Телефон"
             />
+            <div class="validate validate--phone">
+              <div class="validate__icon">
+                <img src="./img/icons/exclamation-circle.svg" alt="icon" width="20">
+
+              </div>
+              <div class="validate__warning">
+                Введите телефон в международном формате:<span
+                  class="validate__example"
+                  >+01234567899</span
+                >
+              </div>
+            </div>
           </div>
           <div class="form-group">
-			<input
-			data-email
+            <input
+              data-email
               type="email"
               name="email"
               autocomplete="on"
@@ -66,11 +86,20 @@
               placeholder="Email"
               required
             />
+            <div class="validate validate--email">
+              <div class="validate__icon">
+                <img src="./img/icons/exclamation-circle.svg" alt="icon" width="20">
+              </div>
+              <div class="validate__warning">
+                Введите email в формате:
+                <span class="validate__example">info@gmail.com</span>
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <label for="exampleFormControlSelect1">Продукт:</label>
-			<select
-			data-courses
+            <select
+              data-courses
               name="product"
               class="form-control"
               id="exampleFormControlSelect1"
