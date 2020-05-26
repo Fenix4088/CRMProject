@@ -28,8 +28,11 @@ const model = (() => {
     );
     // Записываем данные по клиенту в основной массив
     data.clientsDataBase.push(newClient);
+    // Распределение клиентов по Типу курса
+    data[courseType].push(newClient);
     // Записываем данные по клиенту в LS
     localStorage.setItem("All Clients", JSON.stringify(data.clientsDataBase));
+    localStorage.setItem(courseType, JSON.stringify(data[courseType]));
   }
 
   // Ф-я для форматирования даты заполнения заявки
@@ -52,6 +55,11 @@ const model = (() => {
 
   const data = {
     clientsDataBase: [],
+    html: [],
+    js: [],
+    vue: [],
+    php: [],
+    wordpress: [],
   };
 
   return {

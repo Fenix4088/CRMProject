@@ -769,14 +769,14 @@
 .validate {
   padding: 5px;
   width: 100%;
-  display: flex;
+  display: none;
   flex-flow: row nowrap;
   align-items: center;
   position: absolute;
   top: 0;
   left: 330px;
   border: 1px solid rgb(238, 12, 12);
-  background-color: rgb(182, 169, 233);
+  background-color: #2D93F0;
 }
 
 .validate__icon {
@@ -786,7 +786,7 @@
 .validate__warning {
   font-size: 12px;
   font-style: italic;
-  color: rgb(170, 7, 7);
+  color: #000;
 }
 
 .validate__example {
@@ -795,3 +795,4 @@
   background-color: rgb(218, 228, 161);
   color: #000;
 }
+

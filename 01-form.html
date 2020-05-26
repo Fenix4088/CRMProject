@@ -45,10 +45,13 @@
               placeholder="Имя и Фамилия"
               required
             />
-            <div class="validate validate--name">
+            <div data-warning-name class="validate">
               <div class="validate__icon">
-                <img src="./img/icons/exclamation-circle.svg" alt="icon" width="20">
-
+                <img
+                  src="./img/icons/exclamation-circle.svg"
+                  alt="icon"
+                  width="20"
+                />
               </div>
               <div class="validate__warning">Введите имя и фамилию</div>
             </div>
@@ -62,16 +65,20 @@
               autocomplete="on"
               class="form-control"
               placeholder="Телефон"
+              required
             />
-            <div class="validate validate--phone">
+            <div data-warning-phone class="validate">
               <div class="validate__icon">
-                <img src="./img/icons/exclamation-circle.svg" alt="icon" width="20">
-
+                <img
+                  src="./img/icons/exclamation-circle.svg"
+                  alt="icon"
+                  width="20"
+                />
               </div>
               <div class="validate__warning">
                 Введите телефон в международном формате:<span
                   class="validate__example"
-                  >+01234567899</span
+                  >78799233091</span
                 >
               </div>
             </div>
@@ -86,12 +93,16 @@
               placeholder="Email"
               required
             />
-            <div class="validate validate--email">
+            <div data-warning-email class="validate">
               <div class="validate__icon">
-                <img src="./img/icons/exclamation-circle.svg" alt="icon" width="20">
+                <img
+                  src="./img/icons/exclamation-circle.svg"
+                  alt="icon"
+                  width="20"
+                />
               </div>
               <div class="validate__warning">
-                Введите email в формате:
+                Введите email:
                 <span class="validate__example">info@gmail.com</span>
               </div>
             </div>

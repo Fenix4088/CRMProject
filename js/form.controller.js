@@ -9,19 +9,22 @@ const formController = ((ctrlModel, ctrlView) => {
   // Ф-я создания заявки
   function creatRequest(e) {
     e.preventDefault();
-    // Собираем значения из формы и записываем их в переменную
-    const clientInformation = collectClienInformation();
-    // Передаем данные по клиенту в модель
-    ctrlModel.saveRequestData(
-      clientInformation.clientName,
-      clientInformation.clientPhone,
-      clientInformation.clientEmail,
-      clientInformation.clientCoursType
-    );
+    if (ctrlView.formValidation()) {
+      // Собираем значения из формы и записываем их в переменную
+      const clientInformation = collectClienInformation();
 
-    // generateTestDatas.init(); //Генерируем тестовые данные клиентов
-    ctrlModel.testInit(); //Выводим в консоль данные из массива данных о клиенте
-    ctrlView.clearFields(); //Очишаем поля формы
+      // Передаем данные по клиенту в модель
+      ctrlModel.saveRequestData(
+        clientInformation.clientName,
+        clientInformation.clientPhone,
+        clientInformation.clientEmail,
+        clientInformation.clientCoursType
+      );
+
+      generateTestDatas.init(); //Генерируем тестовые данные клиентов
+      ctrlModel.testInit(); //Выводим в консоль данные из массива данных о клиенте
+      // ctrlView.clearFields(); //Очишаем поля формы
+    }
   }
 
   // Ф-я для сбора информации из формы Заявок
