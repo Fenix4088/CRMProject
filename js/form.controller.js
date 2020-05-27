@@ -12,13 +12,15 @@ const formController = ((ctrlModel, ctrlView) => {
     if (ctrlView.formValidation()) {
       // Собираем значения из формы и записываем их в переменную
       const clientInformation = collectClienInformation();
-
+      // Определяем текстовую ноду выбранного option
+      const optionText = findOptionText();
       // Передаем данные по клиенту в модель
       ctrlModel.saveRequestData(
         clientInformation.clientName,
         clientInformation.clientPhone,
         clientInformation.clientEmail,
-        clientInformation.clientCoursType
+        clientInformation.clientCoursType,
+        optionText
       );
 
       generateTestDatas.init(); //Генерируем тестовые данные клиентов
@@ -42,6 +44,20 @@ const formController = ((ctrlModel, ctrlView) => {
     };
   }
 
+  // Ф-я для определения текстовой ноды option который выбран
+  function findOptionText() {
+    const optionsArr = Array.from(formSelect.options);
+    console.log("optionsArr", optionsArr);
+    let optionText;
+    optionsArr.forEach((item) => {
+      if (item.selected) {
+        optionText = item.innerText;
+      }
+    });
+
+    return optionText;
+  }
+
   return {
     init: function () {
       console.log("App started");
@@ -50,3 +66,6 @@ const formController = ((ctrlModel, ctrlView) => {
 })(model, formView);
 
 formController.init();
+
+// const clientCoursType = document.querySelector('[data-courses]');
+// console.log("clientCoursType", clientCoursType)

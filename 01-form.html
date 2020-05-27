@@ -33,7 +33,7 @@
           class="white-plate__line-between white-plate__line-between--main"
         ></div>
 
-        <form id="main-form" method="POST" action="<?=HOST?>payment-form.php">
+        <form id="main-form" method="POST" name="main" action="<?=HOST?>payment-form.php">
           <label>Ваши данные:</label>
           <div class="form-group">
             <input
@@ -113,7 +113,7 @@
               data-courses
               name="product"
               class="form-control"
-              id="exampleFormControlSelect1"
+              id="formSelect"
             >
               <option value="html">Курс по верстке</option>
               <option value="js">Курс по JavaScript</option>
