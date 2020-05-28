@@ -4,22 +4,22 @@ const formController = ((ctrlModel, ctrlView) => {
 
   document
     .querySelector(formDOM.formMain)
-    .addEventListener("submit", creatRequest);
+    .addEventListener("submit", createRequest);
 
   // Ф-я создания заявки
-  function creatRequest(e) {
+  function createRequest(e) {
     e.preventDefault();
     if (ctrlView.formValidation()) {
       // Собираем значения из формы и записываем их в переменную
-      const clientInformation = collectClienInformation();
+      const requestInformation = collectRequestInformation();
       // Определяем текстовую ноду выбранного option
-      const optionText = findOptionText();
+      const optionText = findOptionText().innerText;
       // Передаем данные по клиенту в модель
       ctrlModel.saveRequestData(
-        clientInformation.clientName,
-        clientInformation.clientPhone,
-        clientInformation.clientEmail,
-        clientInformation.clientCoursType,
+        requestInformation.requestName,
+        requestInformation.requestPhone,
+        requestInformation.requestEmail,
+        requestInformation.requestCourseType,
         optionText
       );
 
@@ -30,32 +30,24 @@ const formController = ((ctrlModel, ctrlView) => {
   }
 
   // Ф-я для сбора информации из формы Заявок
-  function collectClienInformation() {
-    const clientName = document.querySelector(formDOM.fullName).value;
-    const clientPhone = document.querySelector(formDOM.phone).value;
-    const clientEmail = document.querySelector(formDOM.email).value;
-    const clientCoursType = document.querySelector(formDOM.courseType).value;
+  function collectRequestInformation() {
+    const requestName = document.querySelector(formDOM.fullName).value;
+    const requestPhone = document.querySelector(formDOM.phone).value;
+    const requestEmail = document.querySelector(formDOM.email).value;
+    const requestCourseType = document.querySelector(formDOM.courseType).value;
 
     return {
-      clientName,
-      clientPhone,
-      clientEmail,
-      clientCoursType,
+      requestName,
+      requestPhone,
+      requestEmail,
+      requestCourseType,
     };
   }
 
   // Ф-я для определения текстовой ноды option который выбран
   function findOptionText() {
-    const optionsArr = Array.from(formSelect.options);
-    console.log("optionsArr", optionsArr);
-    let optionText;
-    optionsArr.forEach((item) => {
-      if (item.selected) {
-        optionText = item.innerText;
-      }
-    });
-
-    return optionText;
+    const formSelect = document.querySelector(formDOM.mainFormSelect);
+    return formSelect.options[formSelect.options.selectedIndex];
   }
 
   return {
@@ -66,6 +58,3 @@ const formController = ((ctrlModel, ctrlView) => {
 })(model, formView);
 
 formController.init();
-
-// const clientCoursType = document.querySelector('[data-courses]');
-// console.log("clientCoursType", clientCoursType)

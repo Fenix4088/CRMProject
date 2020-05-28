@@ -1,43 +1,52 @@
 const model = (() => {
-  class Client {
-    constructor(id, date, name, phoneNumber, email, courseType, coursName, status = "new") {
+  class Request {
+    constructor(
+      id,
+      date,
+      name,
+      phoneNumber,
+      email,
+      courseType,
+      courseName,
+      status = "Новый"
+    ) {
       this.id = id;
       this.date = date;
       this.name = name;
       this.phoneNumber = phoneNumber;
       this.email = email;
       this.courseType = courseType;
-      this.coursName = coursName;
+      this.courseName = courseName;
       this.status = status;
     }
   }
   // Ф-я для сохранения данных из главной формы в модель
-  function saveRequestData(name, phoneNumber, email, courseType, coursName) {
+  function saveRequestData(name, phoneNumber, email, courseType, courseName) {
     let ID = 0;
     // Создаем уникальный индекс клиента
-    if (data.clientsDataBase.length > 0) {
-      const lastIndex = data.clientsDataBase.length - 1;
-      ID = data.clientsDataBase[lastIndex].id + 1;
+    if (data.requestsDataBase.length > 0) {
+      const lastIndex = data.requestsDataBase.length - 1;
+      ID = data.requestsDataBase[lastIndex].id + 1;
     }
     // Создаем клиента
-    const newClient = new Client(
+    const newRequest = new Request(
       ID,
-      clienReaquestDate(),
+      determineRequestDate(),
       name,
       phoneNumber,
       email,
       courseType,
-      coursName
+      courseName
     );
     // Записываем данные по клиенту в основной массив
-    data.clientsDataBase.push(newClient);
+    data.requestsDataBase.push(newRequest);
 
     // Записываем данные по клиенту в LS
-    localStorage.setItem("All Clients", JSON.stringify(data.clientsDataBase));
+    localStorage.setItem("All Requests", JSON.stringify(data.requestsDataBase));
   }
 
   // Ф-я для форматирования даты заполнения заявки
-  function clienReaquestDate() {
+  function determineRequestDate() {
     const date = new Date();
     let day = date.getDate();
     if (day < 10) {
@@ -55,8 +64,10 @@ const model = (() => {
   }
 
   const data = {
-    clientsDataBase: JSON.parse(localStorage.getItem("All Clients")) || [],
-
+    requestsDataBase: JSON.parse(localStorage.getItem("All Requests")) || [],
+    inProgressStatus: [],
+    finishedStatus: [],
+    deletedStatus: [],
   };
 
   return {

@@ -5,6 +5,7 @@ const formView = (() => {
     email: "[data-email]",
     courseType: "[data-courses]",
     formMain: "#main-form",
+    mainFormSelect: "#formSelect",
     // Блоки предупреждающих сообщений
     warningName: "[data-warning-name]",
     warningPhone: "[data-warning-phone]",
@@ -26,11 +27,9 @@ const formView = (() => {
 
     if (nameInput.value.trim() === "" || nameInput.value.length < 7) {
       formVal = false;
-      // showOrhideWarning(formDomStrings.warningName, formVal)
-      showWarning(formDomStrings.warningName);
+      toggleWarning(formDomStrings.warningName, true);
     } else {
-      hideWarning(formDomStrings.warningName);
-      // showOrhideWarning(formDomStrings.warningName, formVal)
+      toggleWarning(formDomStrings.warningName, false);
     }
 
     if (
@@ -39,23 +38,16 @@ const formView = (() => {
       phoneInput.value.length < 11
     ) {
       formVal = false;
-      // showOrhideWarning(formDomStrings.warningPhone, formVal)
-      showWarning(formDomStrings.warningPhone);
+      toggleWarning(formDomStrings.warningPhone, true);
     } else {
-      // showOrhideWarning(formDomStrings.warningPhone, formVal)
-
-      hideWarning(formDomStrings.warningPhone);
+      toggleWarning(formDomStrings.warningPhone, false);
     }
 
     if (!validateEmailReg(emailInput.value) || emailInput.value == "") {
       formVal = false;
-      // showOrhideWarning(formDomStrings.warningEmail, formVal)
-
-      showWarning(formDomStrings.warningEmail);
+      toggleWarning(formDomStrings.warningEmail, true);
     } else {
-      // showOrhideWarning(formDomStrings.warningEmail, formVal)
-
-      hideWarning(formDomStrings.warningEmail);
+      toggleWarning(formDomStrings.warningEmail, false);
     }
 
     return formVal;
@@ -67,26 +59,9 @@ const formView = (() => {
     return re.test(email);
   }
 
-  // Ф-я для отображения Warning message
-  function showWarning(warningBlock) {
-    document.querySelector(warningBlock).style.display = "flex";
+  function toggleWarning(selector, show) {
+    document.querySelector(selector).style.display = show ? "flex" : "none";
   }
-  // Ф-я для скрытия Warning message
-  function hideWarning(warningBlock) {
-    document.querySelector(warningBlock).style.display = "none";
-  }
-
-  // FIXME: Специально оставил, хотел совместить showWarning и  hideWarning в одну ф-ю, пока не получилось
-  // function showOrhideWarning(warningBlock, validateVariable) {
-
-  //   if (validateVariable == false) {
-  //     document.querySelector(warningBlock).style.display = "flex";
-
-  //   } else {
-  //     document.querySelector(warningBlock).style.display = "none";
-
-  //   }
-  // }
 
   return {
     formValidation,
