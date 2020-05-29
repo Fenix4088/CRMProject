@@ -3,6 +3,7 @@ const model = (() => {
     constructor(
       id,
       date,
+      time,
       name,
       phoneNumber,
       email,
@@ -12,6 +13,7 @@ const model = (() => {
     ) {
       this.id = id;
       this.date = date;
+      this.time = time;
       this.name = name;
       this.phoneNumber = phoneNumber;
       this.email = email;
@@ -32,6 +34,7 @@ const model = (() => {
     const newRequest = new Request(
       ID,
       determineRequestDate(),
+      determineRequestTime(),
       name,
       phoneNumber,
       email,
@@ -40,7 +43,6 @@ const model = (() => {
     );
     // Записываем данные по клиенту в основной массив
     data.requestsDataBase.push(newRequest);
-
     // Записываем данные по клиенту в LS
     localStorage.setItem("All Requests", JSON.stringify(data.requestsDataBase));
   }
@@ -63,8 +65,29 @@ const model = (() => {
     return fullDate;
   }
 
+  // Ф-я для определения времени создания заявки
+  function determineRequestTime () {
+    const date = new Date();
+    let hours = date.getHours()
+    let minutes = date.getMinutes()
+    let seconds = date.getSeconds()
+    if (hours < 10) {
+      hours = "0" + hours;
+    }
+    if (minutes < 10) {
+      hours = "0" + minutes;
+    }
+
+    if(seconds < 10) {
+      seconds = "0" + seconds;
+    }
+
+    return hours + ":" + minutes + ":" + seconds
+  }
+
   const data = {
     requestsDataBase: JSON.parse(localStorage.getItem("All Requests")) || [],
+    newStatus: [],
     inProgressStatus: [],
     finishedStatus: [],
     deletedStatus: [],

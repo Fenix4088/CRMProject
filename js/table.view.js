@@ -8,7 +8,7 @@ const tableView = (() => {
     const mainTableBody = document
       .querySelector(tableDomStrings.mainTable)
       .querySelector("tbody");
-    const tableRow = `<tr data-course="${obj.courseType}">
+    const tableRow = `<tr data-course="${obj.courseType}" id=${obj.id}>
                         <th scope="row">${obj.id}</th>
                         <td>${obj.date}</td>
                         <td>${obj.courseName}</td>
@@ -21,15 +21,15 @@ const tableView = (() => {
                         </div>
                         </td>
                         <td>
-                        <a href="03-crm-edit-bid.html">Редактировать</a>
+                        <a data-link="edit" href="#">Редактировать</a>
                         </td>
                     </tr>`;
+                    // 03-crm-edit-bid.html
     mainTableBody.insertAdjacentHTML("beforeend", tableRow);
   }
 
   //   Ф-я отображения отфильтрованых элементов
   function filterItems(value) {
-    console.log(value);
     const trArr = document.querySelector(`${tableDomStrings.mainTable} > tbody`).querySelectorAll("tr");
     trArr.forEach((item) => {
       item.dataset.course == value || value == "all"
