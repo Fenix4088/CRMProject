@@ -1,14 +1,19 @@
-const tableController = ((ctrlModel, ctrlView) => {
+const tableController = ((ctrlModel, ctrlTableView) => {
+    const tableDomStrings = ctrlTableView.getTableDOMElements();
+    document.querySelector(tableDomStrings.courseFilter).addEventListener('change', filterByCourseName)
 
+    function filterByCourseName (e) {
+       const selectValue = e.target.value;
+       ctrlTableView.filterItems(selectValue);
+    }
 
 
     return {
         init: function () {
             console.log("CRM requests list started!")
-            ctrlModel.data.clientsDataBase.forEach( item => {
-                ctrlView.displayClientInfo(item);
+            ctrlModel.data.requestsDataBase.forEach( item => {
+                ctrlTableView.displayRequestInfo(item);
             });
-
         }
     }
     
