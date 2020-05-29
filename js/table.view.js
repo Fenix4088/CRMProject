@@ -32,11 +32,9 @@ const tableView = (() => {
     console.log(value);
     const trArr = document.querySelector(`${tableDomStrings.mainTable} > tbody`).querySelectorAll("tr");
     trArr.forEach((item) => {
-      if (item.dataset.course == value || value == "all") {
-        item.style.display = "table-row";
-      } else {
-        item.style.display = "none";
-      }
+      item.dataset.course == value || value == "all"
+        ? (item.style.display = "table-row")
+        : (item.style.display = "none");
     });
   }
 
