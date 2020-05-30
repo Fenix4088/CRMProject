@@ -7,12 +7,12 @@ const editView = (() => {
     currentRequestName: "[data-request-name]",
     currentRequestEmail: "[data-request-email]",
     curentRequestPhone: "[data-request-phone]",
-    currentRequestStatus: "[requestSelectStatus]",
+    currentRequestStatus: "#requestSelectStatus",
+    saveBtn: "[data-save]"
   };
 
   //  Выводим в поля формы, данные редактируемого запроса
   function displayRequestData(obj) {
-    console.log(obj);
 
     let allInputs = findInputs();
     allInputs.id.innerText = obj.id;
@@ -30,18 +30,13 @@ const editView = (() => {
       id: document.querySelector(editDOMElements.currentRequestID),
       date: document.querySelector(editDOMElements.currentRequestDate),
       time: document.querySelector(editDOMElements.currentRequestTime),
+      courseSelect: document.querySelector(editDOMElements.currentRequestCourse),
       name: document.querySelector(editDOMElements.currentRequestName),
       email: document.querySelector(editDOMElements.currentRequestEmail),
       phone: document.querySelector(editDOMElements.curentRequestPhone),
       status: document.querySelector(editDOMElements.currentRequestStatus),
     };
 
-    function determineCurrenCourse() {
-      const courseSelect = document.querySelector(
-        editDOMElements.currentRequestCourse
-      );
-      console.log("determineCurrenCourse -> courseSelect", courseSelect);
-    }
   }
 
   //  Определяем курс выбранный пользователем
@@ -59,5 +54,9 @@ const editView = (() => {
 
   return {
     displayRequestData,
+    findInputs,
+    getEditDOMElents: function () {
+        return editDOMElements;
+    }
   };
 })();
