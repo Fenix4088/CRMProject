@@ -104,7 +104,7 @@
                     <div class="col-md-2">
                       <strong>ID:</strong>
                     </div>
-                    <div class="col">Заявка №1</div>
+                    <div class="col">Заявка №<span data-request-id>1</span></div>
                   </div>
 
                   <div class="row mb-3">
@@ -112,7 +112,7 @@
                       <strong>Дата создания:</strong>
                     </div>
                     <div class="col">
-                      2020-04-20 13:52:13
+                      <span data-request-date>2020-04-20</span> <span data-request-time>13:52:13</span>
                     </div>
                   </div>
 
@@ -121,12 +121,12 @@
                       <strong>Продукт:</strong>
                     </div>
                     <div class="col">
-                      <select class="custom-select" id="inputGroupSelect01">
-                        <option value="course-html">Курс по верстке</option>
-                        <option value="course-js">Курс по JavaScript</option>
-                        <option value="course-vue">Курс по VUE JS</option>
-                        <option value="course-php">Курс по PHP</option>
-                        <option value="course-wordpress"
+                      <select class="custom-select" id="requestSelectCourse">
+                        <option value="html">Курс по верстке</option>
+                        <option value="js">Курс по JavaScript</option>
+                        <option value="vue">Курс по VUE JS</option>
+                        <option value="php">Курс по PHP</option>
+                        <option value="wordpress"
                           >Курс по WordPress</option
                         >
                       </select>
@@ -139,6 +139,7 @@
                     </div>
                     <div class="col">
                       <input
+                        data-request-name
                         type="text"
                         class="form-control"
                         value="Петр Сергеевич"
@@ -152,6 +153,7 @@
                     </div>
                     <div class="col">
                       <input
+                        data-request-email
                         type="text"
                         class="form-control"
                         value="info@inbox.ru"
@@ -165,6 +167,7 @@
                     </div>
                     <div class="col">
                       <input
+                        data-request-phone
                         type="text"
                         class="form-control"
                         value="+7 (903) 555-77-55"
@@ -177,7 +180,7 @@
                       <strong>Статус заявки:</strong>
                     </div>
                     <div class="col">
-                      <select class="custom-select" id="inputGroupSelect01">
+                      <select class="custom-select" id="requestSelectStatus">
                         <option selected="">Выберите...</option>
                         <option value="new">Новая</option>
                         <option value="inProgress">В работе</option>

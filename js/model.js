@@ -66,11 +66,11 @@ const model = (() => {
   }
 
   // Ф-я для определения времени создания заявки
-  function determineRequestTime () {
+  function determineRequestTime() {
     const date = new Date();
-    let hours = date.getHours()
-    let minutes = date.getMinutes()
-    let seconds = date.getSeconds()
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let seconds = date.getSeconds();
     if (hours < 10) {
       hours = "0" + hours;
     }
@@ -78,15 +78,16 @@ const model = (() => {
       hours = "0" + minutes;
     }
 
-    if(seconds < 10) {
+    if (seconds < 10) {
       seconds = "0" + seconds;
     }
 
-    return hours + ":" + minutes + ":" + seconds
+    return hours + ":" + minutes + ":" + seconds;
   }
 
   const data = {
     requestsDataBase: JSON.parse(localStorage.getItem("All Requests")) || [],
+    editedRequest: JSON.parse(localStorage.getItem("Editing element")),
     newStatus: [],
     inProgressStatus: [],
     finishedStatus: [],

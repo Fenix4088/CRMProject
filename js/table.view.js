@@ -21,16 +21,17 @@ const tableView = (() => {
                         </div>
                         </td>
                         <td>
-                        <a data-link="edit" href="#">Редактировать</a>
+                        <a data-link="edit" href="03-crm-edit-bid.html">Редактировать</a>
                         </td>
                     </tr>`;
-                    // 03-crm-edit-bid.html
     mainTableBody.insertAdjacentHTML("beforeend", tableRow);
   }
 
   //   Ф-я отображения отфильтрованых элементов
   function filterItems(value) {
-    const trArr = document.querySelector(`${tableDomStrings.mainTable} > tbody`).querySelectorAll("tr");
+    const trArr = document
+      .querySelector(`${tableDomStrings.mainTable} > tbody`)
+      .querySelectorAll("tr");
     trArr.forEach((item) => {
       item.dataset.course == value || value == "all"
         ? (item.style.display = "table-row")
