@@ -19,6 +19,11 @@ const statuses = {
         label: "Завершена",
         color: "badge-success"
     },
+    denial: {
+        name: 'denial',
+        label: "Отказ",
+        color: "badge-danger"
+    },
     archived: {
         name: 'archived',
         label: "Архив",

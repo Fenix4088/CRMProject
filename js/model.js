@@ -9,7 +9,6 @@ const model = (() => {
       email,
       courseType,
       courseName,
-      status = "Новый"
     ) {
       this.id = id;
       this.date = date;
@@ -19,7 +18,8 @@ const model = (() => {
       this.email = email;
       this.courseType = courseType;
       this.courseName = courseName;
-      this.status = status;
+      this.status = statuses.new.name;
+      this.statusLabel = statuses.new.label
     }
   }
   // Ф-я для сохранения данных из главной формы в модель

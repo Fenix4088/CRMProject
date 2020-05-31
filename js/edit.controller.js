@@ -49,13 +49,16 @@ const editController = ((ctrlModel, ctrlEditView) => {
     const newStatus =
       inputs.status.options[inputs.status.options.selectedIndex].innerText;
 
+      const newStatusValue = inputs.status.options[inputs.status.options.selectedIndex].value;
+
     const cloneCurrentRequest = Object.assign(currentRequest, {
       name: `${inputs.name.value}`,
       email: `${inputs.email.value}`,
       phoneNumber: `${inputs.phone.value}`,
       courseType: `${courseSelectType}`,
       courseName: `${courseSelectName}`,
-      status: `${newStatus}`,
+      statusLabel: `${newStatus}`,
+      status: `${newStatusValue}`,
     });
     return cloneCurrentRequest;
   }

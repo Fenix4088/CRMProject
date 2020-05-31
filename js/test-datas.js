@@ -20,7 +20,7 @@ const generateTestDatas = (() => {
       "dobrunia@mail.ua"
     ),
 
-    new Client("js", "Елена", "Пчелка", "+76739230008", "elena@mail.ua"),
+    new Client("js", "Елена", "Пчелка", "76739230008", "elena@mail.ua"),
     new Client(
       "js",
       "Анастасия",
@@ -28,7 +28,7 @@ const generateTestDatas = (() => {
       "98297733298",
       "nastia@mail.us"
     ),
-    new Client("js", "Егор", "Плясов", "+10796234091", "yehor@mail.ru"),
+    new Client("js", "Егор", "Плясов", "10796234091", "yehor@mail.ru"),
 
     new Client(
       "vue",

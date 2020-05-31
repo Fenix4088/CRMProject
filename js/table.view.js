@@ -16,14 +16,15 @@ const tableView = (() => {
                         <td>${obj.email}</td>
                         <td>${obj.phoneNumber}</td>
                         <td>
-                        <div class="badge badge-pill badge-danger">
-                            ${obj.status}
+                        <div class="badge badge-pill ${statuses[obj.status].color}">
+                            ${obj.statusLabel}
                         </div>
                         </td>
                         <td>
                         <a data-link="edit" href="03-crm-edit-bid.html">Редактировать</a>
                         </td>
                     </tr>`;
+    // 03-crm-edit-bid.html
     mainTableBody.insertAdjacentHTML("beforeend", tableRow);
   }
 
