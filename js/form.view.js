@@ -32,11 +32,7 @@ const formView = (() => {
       toggleWarning(formDomStrings.warningName, false);
     }
 
-    if (
-      phoneInput.value.trim() == "" ||
-      isNaN(phoneInput.value) ||
-      phoneInput.value.length < 11
-    ) {
+    if (phoneInput.value.trim() == "" || isNaN(phoneInput.value) || phoneInput.value.length < 11) {
       formVal = false;
       toggleWarning(formDomStrings.warningPhone, true);
     } else {
@@ -58,8 +54,6 @@ const formView = (() => {
     var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
   }
-
-
 
   function toggleWarning(selector, show) {
     document.querySelector(selector).style.display = show ? "flex" : "none";

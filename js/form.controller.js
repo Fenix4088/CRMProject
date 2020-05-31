@@ -2,9 +2,7 @@ const formController = ((ctrlModel, ctrlView) => {
   // Берем из шаблога обьект с формой и ее элементами
   const formDOM = ctrlView.getDOMElements();
 
-  document
-    .querySelector(formDOM.formMain)
-    .addEventListener("submit", createRequest);
+  document.querySelector(formDOM.formMain).addEventListener("submit", createRequest);
 
   // Ф-я создания заявки
   function createRequest(e) {
@@ -58,6 +56,3 @@ const formController = ((ctrlModel, ctrlView) => {
 })(model, formView);
 
 formController.init();
-
-
-

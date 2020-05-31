@@ -8,12 +8,11 @@ const editView = (() => {
     currentRequestEmail: "[data-request-email]",
     curentRequestPhone: "[data-request-phone]",
     currentRequestStatus: "#requestSelectStatus",
-    saveBtn: "[data-save]"
+    saveBtn: "[data-save]",
   };
 
   //  Выводим в поля формы, данные редактируемого запроса
   function displayRequestData(obj) {
-
     let allInputs = findInputs();
     allInputs.id.innerText = obj.id;
     allInputs.date.innerText = obj.date;
@@ -37,14 +36,11 @@ const editView = (() => {
       phone: document.querySelector(editDOMElements.curentRequestPhone),
       status: document.querySelector(editDOMElements.currentRequestStatus),
     };
-
   }
 
   //  Определяем курс выбранный пользователем
   function determineCourseType(obj) {
-    const courseSelect = document.querySelector(
-      editDOMElements.currentRequestCourse
-    );
+    const courseSelect = document.querySelector(editDOMElements.currentRequestCourse);
     courseSelect.options;
     Array.from(courseSelect.options).forEach((item) => {
       if (item.value == obj.courseType) {
@@ -55,20 +51,20 @@ const editView = (() => {
 
   // Определяем заранее установленый статус заявки
   function determineStatuse(obj) {
-    const statusSelect = document.querySelector(editDOMElements.currentRequestStatus)
-    console.log("determineStatuse -> statusSelect", statusSelect)
-    Array.from(statusSelect.options).forEach( item => {
-      if(item.value == obj.status) {
+    const statusSelect = document.querySelector(editDOMElements.currentRequestStatus);
+    console.log("determineStatuse -> statusSelect", statusSelect);
+    Array.from(statusSelect.options).forEach((item) => {
+      if (item.value == obj.status) {
         item.setAttribute("selected", "selected");
       }
-    })
+    });
   }
 
   return {
     displayRequestData,
     findInputs,
     getEditDOMElents: function () {
-        return editDOMElements;
-    }
+      return editDOMElements;
+    },
   };
 })();

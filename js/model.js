@@ -1,15 +1,6 @@
 const model = (() => {
   class Request {
-    constructor(
-      id,
-      date,
-      time,
-      name,
-      phoneNumber,
-      email,
-      courseType,
-      courseName,
-    ) {
+    constructor(id, date, time, name, phoneNumber, email, courseType, courseName) {
       this.id = id;
       this.date = date;
       this.time = time;
@@ -19,7 +10,7 @@ const model = (() => {
       this.courseType = courseType;
       this.courseName = courseName;
       this.status = statuses.new.name;
-      this.statusLabel = statuses.new.label
+      this.statusLabel = statuses.new.label;
     }
   }
   // Ф-я для сохранения данных из главной формы в модель
@@ -85,25 +76,27 @@ const model = (() => {
     return hours + ":" + minutes + ":" + seconds;
   }
 
-// Ф-я для форматирования номера телфона
-function formatPhoneNumber (phoneNumber) {
-  let newStr = String(phoneNumber);
-  let newStrArr = newStr.split('');
-  newStrArr.splice(1, 0, `(` );
-  newStrArr.splice(5, 0, `)` );
-  newStrArr.splice(8, 0, `-` );
-  newStrArr.splice(11, 0, `-` );
-  const formatedPhoneNumber = newStrArr.join("")
- return "+" + formatedPhoneNumber;
-}
+  // Ф-я для форматирования номера телфона
+  function formatPhoneNumber(phoneNumber) {
+    let newStr = String(phoneNumber);
+    let newStrArr = newStr.split("");
+    newStrArr.splice(1, 0, `(`);
+    newStrArr.splice(5, 0, `)`);
+    newStrArr.splice(8, 0, `-`);
+    newStrArr.splice(11, 0, `-`);
+    const formatedPhoneNumber = newStrArr.join("");
+    return "+" + formatedPhoneNumber;
+  }
 
   const data = {
     requestsDataBase: JSON.parse(localStorage.getItem("All Requests")) || [],
     editedRequest: JSON.parse(localStorage.getItem("Editing element")),
-    newStatus: [],
-    inProgressStatus: [],
-    finishedStatus: [],
-    deletedStatus: [],
+    statusesFilter: {
+      new: JSON.parse(localStorage.getItem("new")) || [],
+      inProgress: JSON.parse(localStorage.getItem("inProgress")) || [],
+      finished: JSON.parse(localStorage.getItem("finished")) || [],
+      archived: JSON.parse(localStorage.getItem("archived")) || [],
+    },
   };
 
   return {
