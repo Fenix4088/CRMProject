@@ -42,3 +42,10 @@ const tableController = ((ctrlModel, ctrlTableView) => {
 })(model, tableView);
 
 tableController.init();
+
+// function format (phoneNumber) {
+//   console.log(phoneNumber)
+//   let newStr = String(phoneNumber);
+//   console.log(newStr.split(""))
+// }
+// format(79097755777);

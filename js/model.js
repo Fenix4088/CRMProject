@@ -36,7 +36,7 @@ const model = (() => {
       determineRequestDate(),
       determineRequestTime(),
       name,
-      phoneNumber,
+      formatPhoneNumber(phoneNumber),
       email,
       courseType,
       courseName
@@ -83,6 +83,14 @@ const model = (() => {
     }
 
     return hours + ":" + minutes + ":" + seconds;
+  }
+
+  // Ф-я для форматирования номера телефона
+  function formatPhoneNumber (phoneNumber) {
+    // let str = phoneNumber;
+    // str.split('');
+    // console.log("formatPhoneNumber -> str.split('')", str.split(''))
+    return phoneNumber;
   }
 
   const data = {
