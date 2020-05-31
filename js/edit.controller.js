@@ -7,12 +7,8 @@ const editController = ((ctrlModel, ctrlEditView) => {
   // Ф-я получения редактировангого обьекта
   function editCurrentRequest() {
     const currentRequest = ctrlModel.data.editedRequest;
-    // console.log("editCurrentRequest -> currentRequest", currentRequest);
     // Изменяем данные редактируемго обьекта
     ctrlEditView.displayRequestData(currentRequest);
-
-
-    // console.log("editCurrentRequest -> ctrlModel.data.requestsDataBase", ctrlModel.data.requestsDataBase)
   }
 
   // Ф-я изменения текущего запроса
@@ -56,7 +52,7 @@ const editController = ((ctrlModel, ctrlEditView) => {
       email: `${inputs.email.value}`,
       phoneNumber: `${inputs.phone.value}`,
       courseType: `${courseSelectType}`,
-      courseName: `${courseSelectName}`,
+      courseName: `${products[courseSelectType]}`, 
       statusLabel: `${newStatus}`,
       status: `${newStatusValue}`,
     });

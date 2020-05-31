@@ -59,6 +59,8 @@ const formView = (() => {
     return re.test(email);
   }
 
+
+
   function toggleWarning(selector, show) {
     document.querySelector(selector).style.display = show ? "flex" : "none";
   }

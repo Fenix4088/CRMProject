@@ -22,6 +22,7 @@ const editView = (() => {
     allInputs.email.value = obj.email;
     allInputs.phone.value = obj.phoneNumber;
     determineCourseType(obj);
+    determineStatuse(obj);
   }
 
   //  Находим все поля формы
@@ -50,6 +51,17 @@ const editView = (() => {
         item.setAttribute("selected", "selected");
       }
     });
+  }
+
+  // Определяем заранее установленый статус заявки
+  function determineStatuse(obj) {
+    const statusSelect = document.querySelector(editDOMElements.currentRequestStatus)
+    console.log("determineStatuse -> statusSelect", statusSelect)
+    Array.from(statusSelect.options).forEach( item => {
+      if(item.value == obj.status) {
+        item.setAttribute("selected", "selected");
+      }
+    })
   }
 
   return {

@@ -85,13 +85,17 @@ const model = (() => {
     return hours + ":" + minutes + ":" + seconds;
   }
 
-  // Ф-я для форматирования номера телефона
-  function formatPhoneNumber (phoneNumber) {
-    // let str = phoneNumber;
-    // str.split('');
-    // console.log("formatPhoneNumber -> str.split('')", str.split(''))
-    return phoneNumber;
-  }
+// Ф-я для форматирования номера телфона
+function formatPhoneNumber (phoneNumber) {
+  let newStr = String(phoneNumber);
+  let newStrArr = newStr.split('');
+  newStrArr.splice(1, 0, `(` );
+  newStrArr.splice(5, 0, `)` );
+  newStrArr.splice(8, 0, `-` );
+  newStrArr.splice(11, 0, `-` );
+  const formatedPhoneNumber = newStrArr.join("")
+ return "+" + formatedPhoneNumber;
+}
 
   const data = {
     requestsDataBase: JSON.parse(localStorage.getItem("All Requests")) || [],
