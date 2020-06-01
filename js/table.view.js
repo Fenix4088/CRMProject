@@ -1,14 +1,18 @@
 const tableView = (() => {
-  const tableDomStrings = {
-    mainTable: "[data-main-table]",
-    courseFilter: "#groupSelect",
-    // Top Filter
-    topFilter: "[data-top-filter]",
-  };
-  // Ф-я отображения заявок
-  function displayRequestInfo(obj) {
-    const mainTableBody = document.querySelector(tableDomStrings.mainTable).querySelector("tbody");
-    const tableRow = `<tr data-course="${obj.courseType}" id=${obj.id}>
+    const tableDomStrings = {
+        mainTable: "[data-main-table]",
+        courseFilter: "#groupSelect",
+        // Top Filter
+        topFilter: "[data-top-filter]",
+        // aside Filter
+        asideFilter: "[data-aside-filter]",
+        // New requests amount div
+        newRequestsAmountBadge: "[data-new-amount]", 
+    };
+    // Ф-я отображения заявок
+    function displayRequestInfo(obj) {
+        const mainTableBody = document.querySelector(tableDomStrings.mainTable).querySelector("tbody");
+        const tableRow = `<tr data-course="${obj.courseType}" id=${obj.id}>
                         <th scope="row">${obj.id}</th>
                         <td>${obj.date}</td>
                         <td>${obj.courseName}</td>
@@ -24,23 +28,28 @@ const tableView = (() => {
                         <a data-link="edit" href="03-crm-edit-bid.html">Редактировать</a>
                         </td>
                     </tr>`;
-    // 03-crm-edit-bid.html
-    mainTableBody.insertAdjacentHTML("beforeend", tableRow);
-  }
+        // 03-crm-edit-bid.html
+        mainTableBody.insertAdjacentHTML("beforeend", tableRow);
+    }
 
-  //   Ф-я отображения отфильтрованых элементов
-  function filterItems(value) {
-    const trArr = document.querySelector(`${tableDomStrings.mainTable} > tbody`).querySelectorAll("tr");
-    trArr.forEach((item) => {
-      item.dataset.course == value || value == "all" ? (item.style.display = "table-row") : (item.style.display = "none");
-    });
-  }
+    //   Ф-я отображения отфильтрованых элементов
+    function filterItems(value) {
+        const trArr = document.querySelector(`${tableDomStrings.mainTable} > tbody`).querySelectorAll("tr");
+        trArr.forEach((item) => {
+            item.dataset.course == value || value == "all" ? (item.style.display = "table-row") : (item.style.display = "none");
+        });
+    }
 
-  return {
-    getTableDOMElements: function () {
-      return tableDomStrings;
-    },
-    displayRequestInfo,
-    filterItems,
-  };
+    function displayNewRequestsAmount(number) {
+        document.querySelector(tableDomStrings.newRequestsAmountBadge).innerText = number;
+    }
+
+    return {
+        getTableDOMElements: function () {
+            return tableDomStrings;
+        },
+        displayNewRequestsAmount,
+        displayRequestInfo,
+        filterItems,
+    };
 })();
