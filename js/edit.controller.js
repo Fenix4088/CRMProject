@@ -1,7 +1,9 @@
 const editController = ((ctrlModel, ctrlEditView) => {
     const editDOMElements = ctrlEditView.getEditDOMElents();
+    // Клик по кнопке сохранить
     document.querySelector(editDOMElements.saveBtn).addEventListener("click", changingRequest);
-
+    // Клик по кнопке архив
+    document.querySelector(editDOMElements.deleteBtn).addEventListener("click", deletedRequest);
     // Ф-я получения редактировангого обьекта
     function editCurrentRequest() {
         const currentRequest = ctrlModel.data.editedRequest;
@@ -26,6 +28,12 @@ const editController = ((ctrlModel, ctrlEditView) => {
         localStorage.setItem("All Requests", JSON.stringify(changedArray));
         // Удаляем изменяемый элемент из LS после созранения
         localStorage.removeItem("Editing element");
+    }
+    // Ф-я для удаления заявки в архив
+    // TODO: deleted func
+    function deletedRequest(e) {
+        e.preventDefault();
+        console.log(e.target);
     }
 
     //   Ф-я для создания измененного обьекта при сохранении

@@ -41,17 +41,9 @@ const model = (() => {
     // Ф-я для форматирования даты заполнения заявки
     function determineRequestDate() {
         const date = new Date();
-        let day = date.getDate();
-        if (day < 10) {
-            day = "0" + day;
-        }
-        let month = date.getMonth();
-        if (month < 10) {
-            month = "0" + (month + 1);
-        }
-
+        let day = formatNumber(date.getDate());
+        let month = formatNumber(date.getMonth() + 1);
         const year = date.getFullYear();
-
         const fullDate = `${day}.${month}.${year}`;
         return fullDate;
     }
@@ -59,21 +51,15 @@ const model = (() => {
     // Ф-я для определения времени создания заявки
     function determineRequestTime() {
         const date = new Date();
-        let hours = date.getHours();
-        let minutes = date.getMinutes();
-        let seconds = date.getSeconds();
-        if (hours < 10) {
-            hours = "0" + hours;
-        }
-        if (minutes < 10) {
-            hours = "0" + minutes;
-        }
+        let hours = formatNumber(date.getHours());
+        let minutes = formatNumber(date.getMinutes());
+        let seconds = formatNumber(date.getSeconds());
+        return `${hours}:${minutes}:${seconds}`;
+    }
 
-        if (seconds < 10) {
-            seconds = "0" + seconds;
-        }
-
-        return hours + ":" + minutes + ":" + seconds;
+    // Ф-я для форматирования времени и даты
+    function formatNumber(value) {
+        return value > 9 ? value : `0${value}`;
     }
 
     // Ф-я для форматирования номера телфона

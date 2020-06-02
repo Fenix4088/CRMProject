@@ -9,6 +9,7 @@ const editView = (() => {
         curentRequestPhone: "[data-request-phone]",
         currentRequestStatus: "#requestSelectStatus",
         saveBtn: "[data-save]",
+        deleteBtn : "[data-delete]",
     };
 
     //  Выводим в поля формы, данные редактируемого запроса
