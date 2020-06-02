@@ -16,7 +16,7 @@ const model = (() => {
     // Ф-я для сохранения данных из главной формы в модель
     function saveRequestData(name, phoneNumber, email, courseType, courseName) {
         let ID = 0;
-        // Создаем уникальный индекс клиента
+        // Создаем уникальный идетификатор клиента
         if (data.requestsDataBase.length > 0) {
             const lastIndex = data.requestsDataBase.length - 1;
             ID = data.requestsDataBase[lastIndex].id + 1;
@@ -77,16 +77,22 @@ const model = (() => {
     const data = {
         requestsDataBase: JSON.parse(localStorage.getItem("All Requests")) || [],
         editedRequest: JSON.parse(localStorage.getItem("Editing element")),
-        statusesFilter: {
-            new: JSON.parse(localStorage.getItem("new")) || [],
-            inProgress: JSON.parse(localStorage.getItem("inProgress")) || [],
-            finished: JSON.parse(localStorage.getItem("finished")) || [],
-            archived: JSON.parse(localStorage.getItem("archived")) || [],
-        },
+        // statusesFilter: {
+        //     new: JSON.parse(localStorage.getItem("new")) || [],
+        //     inProgress: JSON.parse(localStorage.getItem("inProgress")) || [],
+        //     finished: JSON.parse(localStorage.getItem("finished")) || [],
+        //     archived: JSON.parse(localStorage.getItem("archived")) || [],
+        // },
     };
+
+    const filter = {
+        product: "",
+        status: ""
+    }
 
     return {
         data,
+        filter,
         saveRequestData,
         testInit: function () {
             console.log(data);

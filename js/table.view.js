@@ -7,7 +7,7 @@ const tableView = (() => {
         // aside Filter
         asideFilter: "[data-aside-filter]",
         // New requests amount div
-        newRequestsAmountBadge: "[data-new-amount]", 
+        newRequestsAmountBadge: "[data-new-amount]",
     };
     // Ф-я отображения заявок
     function displayRequestInfo(obj) {
@@ -40,6 +40,21 @@ const tableView = (() => {
         });
     }
 
+    // Ф-я добавления активного класса 
+    function addActiveClass(element) {
+        if (element.parentElement.parentElement.hasAttribute("data-aside-filter")) {
+            for (let i = 0; i < element.parentElement.parentElement.children.length; i++) {
+                element.parentElement.parentElement.children[i].firstChild.classList.remove("active");
+            }
+            element.classList.add("active");
+        }
+    }
+
+    // Ф-я очиски HTML контента в tbody 
+    function clearTableElements() {
+        return (document.querySelector(`${tableDomStrings.mainTable} > tbody`).innerHTML = "");
+    }
+    //Ф-я подсчета новых заявок 
     function displayNewRequestsAmount(number) {
         document.querySelector(tableDomStrings.newRequestsAmountBadge).innerText = number;
     }
@@ -48,6 +63,8 @@ const tableView = (() => {
         getTableDOMElements: function () {
             return tableDomStrings;
         },
+        addActiveClass,
+        clearTableElements,
         displayNewRequestsAmount,
         displayRequestInfo,
         filterItems,

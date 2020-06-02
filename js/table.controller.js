@@ -34,47 +34,37 @@ const tableController = ((ctrlModel, ctrlTableView) => {
     function filterElementsByStatus(e) {
         e.preventDefault();
         // Добавляем активный класс к боковому фильтру
-        addActiveClass(e.target);
-        const mainArr = ctrlModel.data.requestsDataBase;
-        const filteredArr = ctrlModel.data.statusesFilter;
-        // Очистка всех дочерних Нод в tbody
-        clearTableElements();
-        // Фильтруем общий массив по статусу элемента
-        mainArr.filter((item) => {
-            // Если статус элемента совпадает с содержимым элемента то...
-            if (item.status == e.target.dataset.filter) {
-                // Отображаем отфильтрованые элементы
-                ctrlTableView.displayRequestInfo(item);
-                // Если в массиве не содержиться таких элементов то отправляем их в массив
-                if (!filteredArr[item.status].includes(item)) {
-                    filteredArr[item.status].push(item);
-                    localStorage.setItem(`${item.status}`, JSON.stringify(filteredArr[item.status]));
-                }
-            } else if (e.target.dataset.filter === "all") {
-                ctrlTableView.displayRequestInfo(item);
-            }
-        });
-    }
-
-    // Ф-я добавления активного класса
-    function addActiveClass(element) {
-        if (element.parentElement.parentElement.hasAttribute("data-aside-filter")) {
-            for (let i = 0; i < element.parentElement.parentElement.children.length; i++) {
-                element.parentElement.parentElement.children[i].firstChild.classList.remove("active");
-            }
-            element.classList.add("active");
+        ctrlTableView.addActiveClass(e.target);
+        // Очищаем innerHTML в tbody
+        ctrlTableView.clearTableElements();
+        // Выводим отфильтрованные элементы на экран
+        if (e.target.dataset.filter === "all") {
+            // Вывод всех данных на экран
+            ctrlModel.data.requestsDataBase.forEach((item) => ctrlTableView.displayRequestInfo(item));
+        } else {
+            // Записываем значения элемента по которому мы кликнули в обьект с фильтром в моделе
+            ctrlModel.filter.status = e.target.dataset.filter;
+            // Фильтруем данные в зависимости от статуса
+            const filteredRequests = filterData(ctrlModel.data.requestsDataBase);
+            // Вывод отфильтрованных данных на экран
+            filteredRequests.forEach((item) => ctrlTableView.displayRequestInfo(item));
         }
     }
 
-    // Ф-я очиски HTML контента в tbody
-    function clearTableElements() {
-        return (document.querySelector(`${tableDomStrings.mainTable} > tbody`).innerHTML = "");
+    function filterData(data) {
+        let requests = data;
+        Object.keys(ctrlModel.filter).forEach((item) => {
+            if (ctrlModel.filter[item]) {
+                requests = requests.filter((request) => request[item] === ctrlModel.filter[item]);
+            }
+        });
+        return requests;
     }
 
     // Ф-я для подсчета новых заявок
-    function countNewRequests () {
-        const newRequestsAmount = ctrlModel.data.requestsDataBase.filter(item => item.status === statuses.new.name);
-        ctrlTableView.displayNewRequestsAmount(newRequestsAmount.length)
+    function countNewRequests() {
+        const newRequestsAmount = ctrlModel.data.requestsDataBase.filter((item) => item.status === statuses.new.name);
+        ctrlTableView.displayNewRequestsAmount(newRequestsAmount.length);
     }
 
     return {
