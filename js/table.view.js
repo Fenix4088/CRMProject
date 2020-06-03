@@ -9,6 +9,10 @@ const tableView = (() => {
         // New requests amount div
         newRequestsAmountBadge: "[data-new-amount]",
     };
+
+    function displayRequests(requests) {
+        requests.forEach((item) => displayRequestInfo(item));
+    }
     // Ф-я отображения заявок
     function displayRequestInfo(obj) {
         const mainTableBody = document.querySelector(tableDomStrings.mainTable).querySelector("tbody");
@@ -25,10 +29,9 @@ const tableView = (() => {
                         </div>
                         </td>
                         <td>
-                        <a data-link="edit" href="03-crm-edit-bid.html">Редактировать</a>
+                        <a data-link="edit" href="03-crm-edit-bid.html?id=${obj.id}">Редактировать</a>
                         </td>
                     </tr>`;
-        // 03-crm-edit-bid.html
         mainTableBody.insertAdjacentHTML("beforeend", tableRow);
     }
 
@@ -40,7 +43,7 @@ const tableView = (() => {
         });
     }
 
-    // Ф-я добавления активного класса 
+    // Ф-я добавления активного класса
     function addActiveClass(element) {
         if (element.parentElement.parentElement.hasAttribute("data-aside-filter")) {
             for (let i = 0; i < element.parentElement.parentElement.children.length; i++) {
@@ -50,11 +53,11 @@ const tableView = (() => {
         }
     }
 
-    // Ф-я очиски HTML контента в tbody 
+    // Ф-я очиски HTML контента в tbody
     function clearTableElements() {
         return (document.querySelector(`${tableDomStrings.mainTable} > tbody`).innerHTML = "");
     }
-    //Ф-я подсчета новых заявок 
+    //Ф-я подсчета новых заявок
     function displayNewRequestsAmount(number) {
         document.querySelector(tableDomStrings.newRequestsAmountBadge).innerText = number;
     }
@@ -67,6 +70,7 @@ const tableView = (() => {
         clearTableElements,
         displayNewRequestsAmount,
         displayRequestInfo,
+        displayRequests,
         filterItems,
     };
 })();

@@ -74,3 +74,5 @@ const editController = ((ctrlModel, ctrlEditView) => {
 })(model, editView);
 
 editController.init();
+
+

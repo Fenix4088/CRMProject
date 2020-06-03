@@ -86,7 +86,7 @@ const model = (() => {
     };
 
     const filter = {
-        product: "",
+        courseType: "",
         status: ""
     }
 

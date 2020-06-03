@@ -10,9 +10,31 @@ const tableController = ((ctrlModel, ctrlTableView) => {
     // Клик по боковому фильтру
     document.querySelector(tableDomStrings.asideFilter).addEventListener("click", filterElementsByStatus);
 
+    // Фильтрация по названию продукта
     function filterByCourseName(e) {
-        const selectValue = e.target.value;
-        ctrlTableView.filterItems(selectValue);
+        // const selectValue = e.target.value;
+        // ctrlTableView.filterItems(selectValue);
+        /////////////////////////////////////////////////////////////////////////////////////////
+        // Очищаем innerHTML в tbody
+        ctrlTableView.clearTableElements();
+        console.log(e.target.value);
+        // Выводим отфильтрованные элементы на экран
+        if (e.target.value === "all") {
+            // Вывод всех данных на экран
+            ctrlModel.filter.courseType = "";
+            const filteredRequests = filterData(ctrlModel.data.requestsDataBase);
+
+            ctrlTableView.displayRequests(filteredRequests);
+        } else {
+            // Записываем значения элемента по которому мы кликнули в обьект с фильтром в моделе
+            ctrlModel.filter.courseType = e.target.value;
+
+            // Фильтруем данные в зависимости от статуса
+            const filteredRequests = filterData(ctrlModel.data.requestsDataBase);
+            console.log("filterByCourseName -> filteredRequests", filteredRequests);
+            // Вывод отфильтрованных данных на экран
+            ctrlTableView.displayRequests(filteredRequests);
+        }
     }
 
     function goToItemEdit(e) {
@@ -21,7 +43,6 @@ const tableController = ((ctrlModel, ctrlTableView) => {
             // Определяем id элемента по которому мы кликнули
             const currentID = parseInt(e.target.parentElement.parentElement.id);
             // Определяем элемент по которому мы кликнули
-
             ctrlModel.data.requestsDataBase.forEach((item) => {
                 if (item.id == currentID) {
                     localStorage.setItem("Editing element", JSON.stringify(item));
@@ -40,17 +61,22 @@ const tableController = ((ctrlModel, ctrlTableView) => {
         // Выводим отфильтрованные элементы на экран
         if (e.target.dataset.filter === "all") {
             // Вывод всех данных на экран
-            ctrlModel.data.requestsDataBase.forEach((item) => ctrlTableView.displayRequestInfo(item));
+            ctrlModel.filter.status = "";
+            const filteredRequests = filterData(ctrlModel.data.requestsDataBase);
+
+            ctrlTableView.displayRequests(filteredRequests);
         } else {
             // Записываем значения элемента по которому мы кликнули в обьект с фильтром в моделе
             ctrlModel.filter.status = e.target.dataset.filter;
             // Фильтруем данные в зависимости от статуса
             const filteredRequests = filterData(ctrlModel.data.requestsDataBase);
+            console.log("filterElementsByStatus -> filteredRequests", filteredRequests);
             // Вывод отфильтрованных данных на экран
-            filteredRequests.forEach((item) => ctrlTableView.displayRequestInfo(item));
+            ctrlTableView.displayRequests(filteredRequests);
         }
     }
 
+    // Ф-я для фильтрации данных
     function filterData(data) {
         let requests = data;
         Object.keys(ctrlModel.filter).forEach((item) => {
@@ -71,9 +97,7 @@ const tableController = ((ctrlModel, ctrlTableView) => {
         init: function () {
             console.log("CRM requests list started!");
             countNewRequests();
-            ctrlModel.data.requestsDataBase.forEach((item) => {
-                ctrlTableView.displayRequestInfo(item);
-            });
+            ctrlTableView.displayRequests(ctrlModel.data.requestsDataBase);
         },
     };
 })(model, tableView);
