@@ -40,7 +40,6 @@ const tableView = (() => {
         requests.forEach((item) => displayRequestInfo(item));
     }
 
-
     // Ф-я добавления активного класса
     function addActiveClass(element) {
         if (element.parentElement.parentElement.hasAttribute("data-aside-filter")) {

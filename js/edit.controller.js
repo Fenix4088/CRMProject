@@ -2,11 +2,18 @@ const editController = ((ctrlModel, ctrlEditView) => {
     const editDOMElements = ctrlEditView.getEditDOMElents();
     // Клик по кнопке сохранить
     document.querySelector(editDOMElements.saveBtn).addEventListener("click", changingRequest);
-    // Клик по кнопке архив
-    document.querySelector(editDOMElements.deleteBtn).addEventListener("click", deletedRequest);
+    // Клик по кнопке архив TODO: оптимизировать changingRequest и deleteRequest
+    document.querySelector(editDOMElements.deleteBtn).addEventListener("click", deleteRequest);
+
+    // Находим обьект запроса по id из строки запроса
+    function findRequest() {
+        const currentRequestId = parseInt(window.location.search.split("=")[1]);
+        return ctrlModel.data.requestsDataBase.find((item) => item.id == currentRequestId);
+    }
+
     // Ф-я получения редактировангого обьекта
     function editCurrentRequest() {
-        const currentRequest = ctrlModel.data.editedRequest;
+        const currentRequest = findRequest();
         // Изменяем данные редактируемго обьекта
         ctrlEditView.displayRequestData(currentRequest);
     }
@@ -26,20 +33,35 @@ const editController = ((ctrlModel, ctrlEditView) => {
         });
         // Передаем измененный массив в LS
         localStorage.setItem("All Requests", JSON.stringify(changedArray));
-        // Удаляем изменяемый элемент из LS после созранения
-        localStorage.removeItem("Editing element");
     }
+
     // Ф-я для удаления заявки в архив
-    // TODO: deleted func
-    function deletedRequest(e) {
+    function deleteRequest(e) {
         e.preventDefault();
         console.log(e.target);
+        const currentRequest = findRequest();
+        const cloneCurrentRequest = Object.assign(currentRequest, {
+            statusLabel: `${statuses.archived.label}`,
+            status: `${statuses.archived.name}`,
+        });
+        console.log(cloneCurrentRequest);
+
+        // Определяем элемент в общем в массиве, сравниваем новый элемент со старым по id
+        const changedArray = ctrlModel.data.requestsDataBase.map((item) => {
+            if (item.id === cloneCurrentRequest.id) {
+                return cloneCurrentRequest;
+            }
+            return item;
+        });
+        // Передаем измененный массив в LS
+        localStorage.setItem("All Requests", JSON.stringify(changedArray));
+        console.log(ctrlModel.data.requestsDataBase)
     }
 
     //   Ф-я для создания измененного обьекта при сохранении
     function collectNewValues(inputs) {
         // 1  Берем текущий запрос
-        const currentRequest = ctrlModel.data.editedRequest;
+        const currentRequest = findRequest();
         // 2 Определяем значения селектов которые были изменины
         // 2.1 Узнаем значения селекта выбора продукта
         const courseSelectType = inputs.courseSelect.options[inputs.courseSelect.options.selectedIndex].value;
@@ -74,5 +96,3 @@ const editController = ((ctrlModel, ctrlEditView) => {
 })(model, editView);
 
 editController.init();
-
-

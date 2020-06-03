@@ -81,8 +81,8 @@ const model = (() => {
 
     const filter = {
         courseType: "",
-        status: ""
-    }
+        status: "",
+    };
 
     return {
         data,

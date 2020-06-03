@@ -53,7 +53,6 @@ const editView = (() => {
     // Определяем заранее установленый статус заявки
     function determineStatuse(obj) {
         const statusSelect = document.querySelector(editDOMElements.currentRequestStatus);
-        console.log("determineStatuse -> statusSelect", statusSelect);
         Array.from(statusSelect.options).forEach((item) => {
             if (item.value == obj.status) {
                 item.setAttribute("selected", "selected");
