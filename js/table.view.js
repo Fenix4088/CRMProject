@@ -10,9 +10,6 @@ const tableView = (() => {
         newRequestsAmountBadge: "[data-new-amount]",
     };
 
-    function displayRequests(requests) {
-        requests.forEach((item) => displayRequestInfo(item));
-    }
     // Ф-я отображения заявок
     function displayRequestInfo(obj) {
         const mainTableBody = document.querySelector(tableDomStrings.mainTable).querySelector("tbody");
@@ -35,13 +32,14 @@ const tableView = (() => {
         mainTableBody.insertAdjacentHTML("beforeend", tableRow);
     }
 
-    //   Ф-я отображения отфильтрованых элементов
-    function filterItems(value) {
-        const trArr = document.querySelector(`${tableDomStrings.mainTable} > tbody`).querySelectorAll("tr");
-        trArr.forEach((item) => {
-            item.dataset.course == value || value == "all" ? (item.style.display = "table-row") : (item.style.display = "none");
-        });
+    // Перебор и отображение элементов
+    function displayRequests(requests) {
+        // Очистка полей tbody
+        document.querySelector(`${tableDomStrings.mainTable} > tbody`).innerHTML = "";
+        // Перебор элементов массива и рендеринг
+        requests.forEach((item) => displayRequestInfo(item));
     }
+
 
     // Ф-я добавления активного класса
     function addActiveClass(element) {
@@ -53,10 +51,6 @@ const tableView = (() => {
         }
     }
 
-    // Ф-я очиски HTML контента в tbody
-    function clearTableElements() {
-        return (document.querySelector(`${tableDomStrings.mainTable} > tbody`).innerHTML = "");
-    }
     //Ф-я подсчета новых заявок
     function displayNewRequestsAmount(number) {
         document.querySelector(tableDomStrings.newRequestsAmountBadge).innerText = number;
@@ -67,10 +61,7 @@ const tableView = (() => {
             return tableDomStrings;
         },
         addActiveClass,
-        clearTableElements,
         displayNewRequestsAmount,
-        displayRequestInfo,
         displayRequests,
-        filterItems,
     };
 })();

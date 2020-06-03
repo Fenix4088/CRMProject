@@ -77,12 +77,6 @@ const model = (() => {
     const data = {
         requestsDataBase: JSON.parse(localStorage.getItem("All Requests")) || [],
         editedRequest: JSON.parse(localStorage.getItem("Editing element")),
-        // statusesFilter: {
-        //     new: JSON.parse(localStorage.getItem("new")) || [],
-        //     inProgress: JSON.parse(localStorage.getItem("inProgress")) || [],
-        //     finished: JSON.parse(localStorage.getItem("finished")) || [],
-        //     archived: JSON.parse(localStorage.getItem("archived")) || [],
-        // },
     };
 
     const filter = {

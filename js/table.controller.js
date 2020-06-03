@@ -10,31 +10,44 @@ const tableController = ((ctrlModel, ctrlTableView) => {
     // Клик по боковому фильтру
     document.querySelector(tableDomStrings.asideFilter).addEventListener("click", filterElementsByStatus);
 
-    // Фильтрация по названию продукта
-    function filterByCourseName(e) {
-        // const selectValue = e.target.value;
-        // ctrlTableView.filterItems(selectValue);
-        /////////////////////////////////////////////////////////////////////////////////////////
-        // Очищаем innerHTML в tbody
-        ctrlTableView.clearTableElements();
-        console.log(e.target.value);
-        // Выводим отфильтрованные элементы на экран
-        if (e.target.value === "all") {
-            // Вывод всех данных на экран
-            ctrlModel.filter.courseType = "";
+    // Ф-я обновления фильтра
+    function updateFilter(key, value) {
+        if (value === "all") {
+            // Присваеваем обьекту значение в виде пустой строки
+            ctrlModel.filter[key] = "";
+            // Фильтруем элементы
             const filteredRequests = filterData(ctrlModel.data.requestsDataBase);
-
+            // Вывод данных на экран
             ctrlTableView.displayRequests(filteredRequests);
         } else {
             // Записываем значения элемента по которому мы кликнули в обьект с фильтром в моделе
-            ctrlModel.filter.courseType = e.target.value;
-
+            ctrlModel.filter[key] = value;
             // Фильтруем данные в зависимости от статуса
             const filteredRequests = filterData(ctrlModel.data.requestsDataBase);
-            console.log("filterByCourseName -> filteredRequests", filteredRequests);
             // Вывод отфильтрованных данных на экран
             ctrlTableView.displayRequests(filteredRequests);
         }
+    }
+    // Ф-я определения ключей в обьекте
+    function getObjectKeys (obj) {
+        let objKeys =  Object.keys(obj)
+        return objKeys
+    }
+
+    // Фильтрация по названию продукта
+    function filterByCourseName(e) {
+        let keys = getObjectKeys(ctrlModel.filter);
+        // Обновляем фильтр по ключу courseType
+        updateFilter(keys[0], e.target.value);
+    }
+
+    // Фильтрация по статусу
+    function filterElementsByStatus(e) {
+        // Добавляем активный класс к боковому фильтру
+        ctrlTableView.addActiveClass(e.target);
+        let keys = getObjectKeys(ctrlModel.filter);
+        // Обновляем фильтр по ключу status
+        updateFilter(keys[1], e.target.dataset.filter);
     }
 
     function goToItemEdit(e) {
@@ -48,31 +61,6 @@ const tableController = ((ctrlModel, ctrlTableView) => {
                     localStorage.setItem("Editing element", JSON.stringify(item));
                 }
             });
-        }
-    }
-
-    // Фильтрация по статусу
-    function filterElementsByStatus(e) {
-        e.preventDefault();
-        // Добавляем активный класс к боковому фильтру
-        ctrlTableView.addActiveClass(e.target);
-        // Очищаем innerHTML в tbody
-        ctrlTableView.clearTableElements();
-        // Выводим отфильтрованные элементы на экран
-        if (e.target.dataset.filter === "all") {
-            // Вывод всех данных на экран
-            ctrlModel.filter.status = "";
-            const filteredRequests = filterData(ctrlModel.data.requestsDataBase);
-
-            ctrlTableView.displayRequests(filteredRequests);
-        } else {
-            // Записываем значения элемента по которому мы кликнули в обьект с фильтром в моделе
-            ctrlModel.filter.status = e.target.dataset.filter;
-            // Фильтруем данные в зависимости от статуса
-            const filteredRequests = filterData(ctrlModel.data.requestsDataBase);
-            console.log("filterElementsByStatus -> filteredRequests", filteredRequests);
-            // Вывод отфильтрованных данных на экран
-            ctrlTableView.displayRequests(filteredRequests);
         }
     }
 
