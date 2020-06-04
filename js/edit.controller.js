@@ -24,38 +24,34 @@ const editController = ((ctrlModel, ctrlEditView) => {
         const formInputs = ctrlEditView.findInputs();
         // Фиксируем все изменения в запросе
         const changedRequest = collectNewValues(formInputs);
-        // Определяем элемент в общем в массиве, сравниваем новый элемент со старым по id
-        const changedArray = ctrlModel.data.requestsDataBase.map((item) => {
-            if (item.id === changedRequest.id) {
-                return changedRequest;
-            }
-            return item;
-        });
-        // Передаем измененный массив в LS
-        localStorage.setItem("All Requests", JSON.stringify(changedArray));
+        // Обновляем data доюавляем туда обьект с новыми значениями(вместо старого)
+        updateRequestsData(changedRequest);
     }
 
     // Ф-я для удаления заявки в архив
     function deleteRequest(e) {
-        e.preventDefault();
+        // e.preventDefault();
         console.log(e.target);
         const currentRequest = findRequest();
         const cloneCurrentRequest = Object.assign(currentRequest, {
             statusLabel: `${statuses.archived.label}`,
             status: `${statuses.archived.name}`,
         });
-        console.log(cloneCurrentRequest);
+        // Обновляем data доюавляем туда обьект с новыми значениями(вместо старого)
+        updateRequestsData(cloneCurrentRequest);
+    }
 
+    // Ф-я обновления массива с данными
+    function updateRequestsData(newRequest) {
         // Определяем элемент в общем в массиве, сравниваем новый элемент со старым по id
         const changedArray = ctrlModel.data.requestsDataBase.map((item) => {
-            if (item.id === cloneCurrentRequest.id) {
-                return cloneCurrentRequest;
+            if (item.id === newRequest.id) {
+                return newRequest;
             }
             return item;
         });
         // Передаем измененный массив в LS
         localStorage.setItem("All Requests", JSON.stringify(changedArray));
-        console.log(ctrlModel.data.requestsDataBase)
     }
 
     //   Ф-я для создания измененного обьекта при сохранении

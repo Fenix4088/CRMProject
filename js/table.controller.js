@@ -3,8 +3,7 @@ const tableController = ((ctrlModel, ctrlTableView) => {
 
     // Изменения в фильтре по продукту
     document.querySelector(tableDomStrings.courseFilter).addEventListener("change", filterByCourseName);
-    // Клик по ссылке редактирования каждого элемента
-    // document.querySelector(tableDomStrings.mainTable).addEventListener("click", goToItemEdit);
+
     // Клик по верхнему фильтру
     document.querySelector(tableDomStrings.topFilter).addEventListener("click", filterElementsByStatus);
     // Клик по боковому фильтру
@@ -51,23 +50,8 @@ const tableController = ((ctrlModel, ctrlTableView) => {
         updateFilter(keys[1], e.target.dataset.filter);
     }
 
-    // function goToItemEdit(e) {
-    
-    //     // ловим клик по кнопке редактирования
-    //     if (e.target.hasAttribute("data-link") && e.target.getAttribute("data-link") == "edit") {
-    //         // Определяем id элемента по которому мы кликнули
-    //         const currentID = parseInt(e.target.parentElement.parentElement.id);
-    //         // Определяем элемент по которому мы кликнули
-    //         ctrlModel.data.requestsDataBase.forEach((item) => {
-    //             if (item.id == currentID) {
-    //                 localStorage.setItem("Editing element", JSON.stringify(item));
-    //             }
-    //         });
-    //     }
-    // }
-
     // Ф-я для фильтрации данных
-    
+
     function filterData(data) {
         let requests = data;
         Object.keys(ctrlModel.filter).forEach((item) => {
