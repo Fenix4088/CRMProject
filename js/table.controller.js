@@ -49,7 +49,10 @@ const tableController = ((ctrlModel, ctrlTableView) => {
         updateFilter(keys[1], e.target.dataset.filter);
         // Рендерим зааахивированые элементы если клик произошел по фильтру Архив
         if (e.target.getAttribute("data-filter") === statuses.archived.name) {
+            // Рендерим заархивированные элементы
             ctrlTableView.displayRequests(ctrlModel.data.archived);
+            // Скрываем ссылку Редактировать у заархивированных элементов
+            ctrlTableView.hideArchivedElementLink();
         }
     }
 
@@ -70,10 +73,17 @@ const tableController = ((ctrlModel, ctrlTableView) => {
         ctrlTableView.displayNewRequestsAmount(newRequestsAmount.length);
     }
 
+    // Ф-я для подсчета заархивированных заявок
+    function countArchivedRequests () {
+        const archivedRequestsAmount = ctrlModel.data.archived.length;
+        ctrlTableView.displayArchivedRequestsAmount(ctrlModel.data.archived.length);
+    }
+
     return {
         init: function () {
             console.log("CRM requests list started!");
             countNewRequests();
+            countArchivedRequests();
             ctrlTableView.displayRequests(ctrlModel.data.requestsDataBase);
         },
     };

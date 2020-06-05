@@ -780,7 +780,7 @@
 }
 
 .hide {
-  display: none;
+  visibility: hidden;
 }
 
 .validate__icon {

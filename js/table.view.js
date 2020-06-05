@@ -8,12 +8,14 @@ const tableView = (() => {
         asideFilter: "[data-aside-filter]",
         // New requests amount div
         newRequestsAmountBadge: "[data-new-amount]",
+        // Archived requests amount div
+        archivedRequestsAmounBadge: "[data-archived-amount]",
     };
 
     // Ф-я отображения заявок
     function displayRequestInfo(obj) {
         const mainTableBody = document.querySelector(tableDomStrings.mainTable).querySelector("tbody");
-        
+
         const tableRow = `<tr data-course="${obj.courseType}" data-status="${obj.status}" id=${obj.id}>
                         <th scope="row">${obj.id}</th>
                         <td>${obj.date}</td>
@@ -56,24 +58,27 @@ const tableView = (() => {
         document.querySelector(tableDomStrings.newRequestsAmountBadge).innerText = number;
     }
 
-    function hideArchived () {
-        const elementsArr = document.querySelectorAll(`${tableDomStrings.mainTable} > tbody > tr`)
-        elementsArr.forEach( item => {
-            if(item.getAttribute('data-status') == statuses.archived.name) {
-                item.classList.add("hide");
-            }
-        })
+    // Ф-я для вывода на экраг количества заархивированных заявок
+    function displayArchivedRequestsAmount(number) {
+        document.querySelector(tableDomStrings.archivedRequestsAmounBadge).innerText = number;
+    }
 
-     }
+    // Ф-я для сокрытия ссылки Редактирования у заархивированного элемента
+    function hideArchivedElementLink() {
+        const tbody = document.querySelector("tbody").querySelectorAll('[data-link]');
+        tbody.forEach( item => {
+            item.classList.add("hide");
+        }) 
+    }
 
     return {
         getTableDOMElements: function () {
             return tableDomStrings;
         },
         addActiveClass,
+        hideArchivedElementLink,
         displayNewRequestsAmount,
+        displayArchivedRequestsAmount,
         displayRequests,
-        hideArchived,
-
     };
 })();
