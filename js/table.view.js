@@ -43,14 +43,13 @@ const tableView = (() => {
         requests.forEach((item) => displayRequestInfo(item));
     }
 
-    // Ф-я добавления активного класса
+    // Добавление активного класса к элементу бокового фильтра
     function addActiveClass(element) {
-        if (element.parentElement.parentElement.hasAttribute("data-aside-filter")) {
-            for (let i = 0; i < element.parentElement.parentElement.children.length; i++) {
-                element.parentElement.parentElement.children[i].firstChild.classList.remove("active");
-            }
-            element.classList.add("active");
+        const filterList = element.parentElement.parentElement;
+        if (filterList.querySelector(".active")) {
+            filterList.querySelector(".active").classList.remove("active");
         }
+        element.classList.add("active");
     }
 
     //Ф-я подсчета новых заявок
@@ -65,10 +64,10 @@ const tableView = (() => {
 
     // Ф-я для сокрытия ссылки Редактирования у заархивированного элемента
     function hideArchivedElementLink() {
-        const tbody = document.querySelector("tbody").querySelectorAll('[data-link]');
-        tbody.forEach( item => {
+        const tbody = document.querySelector("tbody").querySelectorAll("[data-link]");
+        tbody.forEach((item) => {
             item.classList.add("hide");
-        }) 
+        });
     }
 
     return {
