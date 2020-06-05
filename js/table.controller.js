@@ -3,7 +3,6 @@ const tableController = ((ctrlModel, ctrlTableView) => {
 
     // Изменения в фильтре по продукту
     document.querySelector(tableDomStrings.courseFilter).addEventListener("change", filterByCourseName);
-
     // Клик по верхнему фильтру
     document.querySelector(tableDomStrings.topFilter).addEventListener("click", filterElementsByStatus);
     // Клик по боковому фильтру
@@ -28,7 +27,7 @@ const tableController = ((ctrlModel, ctrlTableView) => {
         }
     }
 
-    // Ф-я определения ключей в обьекте
+    // Ф-я определения ключей в обьекте с фильтром
     function getObjectKeys(obj) {
         let objKeys = Object.keys(obj);
         return objKeys;
@@ -48,10 +47,13 @@ const tableController = ((ctrlModel, ctrlTableView) => {
         let keys = getObjectKeys(ctrlModel.filter);
         // Обновляем фильтр по ключу status
         updateFilter(keys[1], e.target.dataset.filter);
+        // Рендерим зааахивированые элементы если клик произошел по фильтру Архив
+        if (e.target.getAttribute("data-filter") === statuses.archived.name) {
+            ctrlTableView.displayRequests(ctrlModel.data.archived);
+        }
     }
 
     // Ф-я для фильтрации данных
-
     function filterData(data) {
         let requests = data;
         Object.keys(ctrlModel.filter).forEach((item) => {

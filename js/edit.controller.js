@@ -2,7 +2,6 @@ const editController = ((ctrlModel, ctrlEditView) => {
     const editDOMElements = ctrlEditView.getEditDOMElents();
     // Клик по кнопке сохранить
     document.querySelector(editDOMElements.saveBtn).addEventListener("click", changingRequest);
-    // Клик по кнопке архив TODO: оптимизировать changingRequest и deleteRequest
     document.querySelector(editDOMElements.deleteBtn).addEventListener("click", deleteRequest);
 
     // Находим обьект запроса по id из строки запроса
@@ -31,14 +30,24 @@ const editController = ((ctrlModel, ctrlEditView) => {
     // Ф-я для удаления заявки в архив
     function deleteRequest(e) {
         // e.preventDefault();
-        console.log(e.target);
         const currentRequest = findRequest();
         const cloneCurrentRequest = Object.assign(currentRequest, {
             statusLabel: `${statuses.archived.label}`,
             status: `${statuses.archived.name}`,
         });
-        // Обновляем data доюавляем туда обьект с новыми значениями(вместо старого)
-        updateRequestsData(cloneCurrentRequest);
+
+        // // Обновляем data доюавляем туда обьект с новыми значениями(вместо старого)
+        // updateRequestsData(cloneCurrentRequest);
+
+        ctrlModel.data.requestsDataBase.forEach((item) => {
+            if (item.status === statuses.archived.name) {
+                let archivedElementIndex = ctrlModel.data.requestsDataBase.indexOf(item);
+                archivingElement(archivedElementIndex);
+            }
+
+            // Обновляем data доюавляем туда обьект с новыми значениями(вместо старого)
+            updateRequestsData(cloneCurrentRequest);
+        });
     }
 
     // Ф-я обновления массива с данными
@@ -52,6 +61,15 @@ const editController = ((ctrlModel, ctrlEditView) => {
         });
         // Передаем измененный массив в LS
         localStorage.setItem("All Requests", JSON.stringify(changedArray));
+    }
+
+    // Ф-я для создания хранилища для заархивированных элементов
+    function archivingElement (index) {
+        const archivedElement = ctrlModel.data.requestsDataBase.splice(index, 1);
+        if (!ctrlModel.data.archived.includes(archivedElement[0])) {
+            ctrlModel.data.archived.push(archivedElement[0]);
+        }
+        localStorage.setItem("Archived", JSON.stringify(ctrlModel.data.archived));
     }
 
     //   Ф-я для создания измененного обьекта при сохранении

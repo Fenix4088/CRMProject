@@ -13,7 +13,8 @@ const tableView = (() => {
     // Ф-я отображения заявок
     function displayRequestInfo(obj) {
         const mainTableBody = document.querySelector(tableDomStrings.mainTable).querySelector("tbody");
-        const tableRow = `<tr data-course="${obj.courseType}" id=${obj.id}>
+        
+        const tableRow = `<tr data-course="${obj.courseType}" data-status="${obj.status}" id=${obj.id}>
                         <th scope="row">${obj.id}</th>
                         <td>${obj.date}</td>
                         <td>${obj.courseName}</td>
@@ -55,6 +56,16 @@ const tableView = (() => {
         document.querySelector(tableDomStrings.newRequestsAmountBadge).innerText = number;
     }
 
+    function hideArchived () {
+        const elementsArr = document.querySelectorAll(`${tableDomStrings.mainTable} > tbody > tr`)
+        elementsArr.forEach( item => {
+            if(item.getAttribute('data-status') == statuses.archived.name) {
+                item.classList.add("hide");
+            }
+        })
+
+     }
+
     return {
         getTableDOMElements: function () {
             return tableDomStrings;
@@ -62,5 +73,7 @@ const tableView = (() => {
         addActiveClass,
         displayNewRequestsAmount,
         displayRequests,
+        hideArchived,
+
     };
 })();

@@ -76,6 +76,7 @@ const model = (() => {
 
     const data = {
         requestsDataBase: JSON.parse(localStorage.getItem("All Requests")) || [],
+        archived: JSON.parse(localStorage.getItem("Archived")) || [],
     };
 
     const filter = {

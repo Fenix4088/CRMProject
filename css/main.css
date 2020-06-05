@@ -779,6 +779,10 @@
   background-color: #2D93F0;
 }
 
+.hide {
+  display: none;
+}
+
 .validate__icon {
   margin-right: 10px;
 }
