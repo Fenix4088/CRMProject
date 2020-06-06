@@ -12,14 +12,14 @@ const tableController = ((ctrlModel, ctrlTableView) => {
     function updateFilter(key, value) {
         if (value === "all") {
             // Присваеваем обьекту значение в виде пустой строки
-            ctrlModel.filter[key] = "";
+            ctrlModel.filter.fields[key] = "";
             // Фильтруем элементы
             const filteredRequests = filterData(ctrlModel.data.requestsDataBase);
             // Вывод данных на экран
             ctrlTableView.displayRequests(filteredRequests);
         } else {
             // Записываем значения элемента по которому мы кликнули в обьект с фильтром в моделе
-            ctrlModel.filter[key] = value;
+            ctrlModel.filter.fields[key] = value;
             // Фильтруем данные в зависимости от статуса
             const filteredRequests = filterData(ctrlModel.data.requestsDataBase);
             // Вывод отфильтрованных данных на экран
@@ -35,16 +35,18 @@ const tableController = ((ctrlModel, ctrlTableView) => {
 
     // Фильтрация по названию продукта
     function filterByCourseName(e) {
-        let keys = getObjectKeys(ctrlModel.filter);
+        let keys = getObjectKeys(ctrlModel.filter.fields);
         // Обновляем фильтр по ключу courseType
         updateFilter(keys[0], e.target.value);
+        // Сохранения значения фильтра в LS
+        ctrlModel.filter.saveFilter();
     }
 
     // Фильтрация по статусу
     function filterElementsByStatus(e) {
         // Добавляем активный класс к боковому фильтру
         ctrlTableView.addActiveClass(e.target);
-        let keys = getObjectKeys(ctrlModel.filter);
+        let keys = getObjectKeys(ctrlModel.filter.fields);
         // Обновляем фильтр по ключу status
         updateFilter(keys[1], e.target.dataset.filter);
         // Рендерим зааахивированые элементы если клик произошел по фильтру Архив
@@ -54,14 +56,17 @@ const tableController = ((ctrlModel, ctrlTableView) => {
             // Скрываем ссылку Редактировать у заархивированных элементов
             ctrlTableView.hideArchivedElementLink();
         }
+
+        // Сохранения значения фильтра в LS
+        ctrlModel.filter.saveFilter();
     }
 
     // Ф-я для фильтрации данных
     function filterData(data) {
         let requests = data;
-        Object.keys(ctrlModel.filter).forEach((item) => {
-            if (ctrlModel.filter[item]) {
-                requests = requests.filter((request) => request[item] === ctrlModel.filter[item]);
+        Object.keys(ctrlModel.filter.fields).forEach((item) => {
+            if (ctrlModel.filter.fields[item]) {
+                requests = requests.filter((request) => request[item] === ctrlModel.filter.fields[item]);
             }
         });
         return requests;
@@ -74,7 +79,7 @@ const tableController = ((ctrlModel, ctrlTableView) => {
     }
 
     // Ф-я для подсчета заархивированных заявок
-    function countArchivedRequests () {
+    function countArchivedRequests() {
         const archivedRequestsAmount = ctrlModel.data.archived.length;
         ctrlTableView.displayArchivedRequestsAmount(ctrlModel.data.archived.length);
     }
