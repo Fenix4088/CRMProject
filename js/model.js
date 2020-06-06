@@ -87,7 +87,7 @@ const model = (() => {
         },
 
         getFilter: function () {
-            JSON.parse(localStorage.getItem("Filter"));
+            return JSON.parse(localStorage.getItem("Filter"));
         },
         saveFilter: function () {
             localStorage.setItem("Filter", JSON.stringify(filter.fields));

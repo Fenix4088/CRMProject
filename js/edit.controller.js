@@ -3,6 +3,7 @@ const editController = ((ctrlModel, ctrlEditView) => {
     // Клик по кнопке сохранить
     document.querySelector(editDOMElements.saveBtn).addEventListener("click", changingRequest);
     document.querySelector(editDOMElements.deleteBtn).addEventListener("click", deleteRequest);
+    document.querySelector(editDOMElements.asideFilter).addEventListener("click", goBackToFilter);
 
     // Находим обьект запроса по id из строки запроса
     function findRequest() {
@@ -36,9 +37,6 @@ const editController = ((ctrlModel, ctrlEditView) => {
             status: `${statuses.archived.name}`,
         });
 
-        // // Обновляем data доюавляем туда обьект с новыми значениями(вместо старого)
-        // updateRequestsData(cloneCurrentRequest);
-
         ctrlModel.data.requestsDataBase.forEach((item) => {
             if (item.status === statuses.archived.name) {
                 let archivedElementIndex = ctrlModel.data.requestsDataBase.indexOf(item);
@@ -48,6 +46,26 @@ const editController = ((ctrlModel, ctrlEditView) => {
             // Обновляем data доюавляем туда обьект с новыми значениями(вместо старого)
             updateRequestsData(cloneCurrentRequest);
         });
+    }
+
+    // Ф-я для перехода к фильтру
+    function goBackToFilter(e) {
+        e.preventDefault();
+        ctrlEditView.addActiveClass(e.target);
+        const keys = Object.keys(ctrlModel.filter.fields);
+        updateFilter(keys[1], e.target.dataset.filter);
+        ctrlModel.filter.saveFilter();
+    }
+
+    // Ф-я для обновления фильтра
+    function updateFilter(key, value) {
+        if (value === "all") {
+            // Присваеваем обьекту значение в виде пустой строки
+            ctrlModel.filter.fields[key] = "";
+        } else {
+            // Записываем значения элемента по которому мы кликнули в обьект с фильтром в моделе
+            ctrlModel.filter.fields[key] = value;
+        }
     }
 
     // Ф-я обновления массива с данными
@@ -64,7 +82,7 @@ const editController = ((ctrlModel, ctrlEditView) => {
     }
 
     // Ф-я для создания хранилища для заархивированных элементов
-    function archivingElement (index) {
+    function archivingElement(index) {
         const archivedElement = ctrlModel.data.requestsDataBase.splice(index, 1);
         if (!ctrlModel.data.archived.includes(archivedElement[0])) {
             ctrlModel.data.archived.push(archivedElement[0]);
@@ -102,9 +120,23 @@ const editController = ((ctrlModel, ctrlEditView) => {
         const courseSelect = document.querySelector(editDOMElements.currentRequestCourse);
     }
 
+    // Ф-я для подсчета новых заявок
+    function countNewRequests() {
+        const newRequestsAmount = ctrlModel.data.requestsDataBase.filter((item) => item.status === statuses.new.name);
+        ctrlEditView.displayNewRequestsAmount(newRequestsAmount.length);
+    }
+
+    // Ф-я для подсчета заархивированных заявок
+    function countArchivedRequests() {
+        const archivedRequestsAmount = ctrlModel.data.archived.length;
+        ctrlEditView.displayArchivedRequestsAmount(archivedRequestsAmount);
+    }
+
     return {
         init: function () {
             editCurrentRequest();
+            countNewRequests();
+            countArchivedRequests()
         },
     };
 })(model, editView);

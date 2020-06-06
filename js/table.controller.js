@@ -81,7 +81,12 @@ const tableController = ((ctrlModel, ctrlTableView) => {
     // Ф-я для подсчета заархивированных заявок
     function countArchivedRequests() {
         const archivedRequestsAmount = ctrlModel.data.archived.length;
-        ctrlTableView.displayArchivedRequestsAmount(ctrlModel.data.archived.length);
+        ctrlTableView.displayArchivedRequestsAmount(archivedRequestsAmount);
+    }
+
+    function test () {
+        const a = ctrlModel.filter.getFilter();
+        console.log("test -> a", a)
     }
 
     return {
@@ -90,6 +95,7 @@ const tableController = ((ctrlModel, ctrlTableView) => {
             countNewRequests();
             countArchivedRequests();
             ctrlTableView.displayRequests(ctrlModel.data.requestsDataBase);
+            test();
         },
     };
 })(model, tableView);

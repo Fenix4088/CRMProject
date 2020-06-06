@@ -783,6 +783,10 @@
   visibility: hidden;
 }
 
+.counter {
+  pointer-events: none;
+}
+
 .validate__icon {
   margin-right: 10px;
 }
