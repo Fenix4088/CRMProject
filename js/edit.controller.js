@@ -50,7 +50,7 @@ const editController = ((ctrlModel, ctrlEditView) => {
 
     // Ф-я для перехода к фильтру
     function goBackToFilter(e) {
-        e.preventDefault();
+        // e.preventDefault();
         ctrlEditView.addActiveClass(e.target);
         const keys = Object.keys(ctrlModel.filter.fields);
         updateFilter(keys[1], e.target.dataset.filter);

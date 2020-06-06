@@ -17,6 +17,11 @@ const tableController = ((ctrlModel, ctrlTableView) => {
             const filteredRequests = filterData(ctrlModel.data.requestsDataBase);
             // Вывод данных на экран
             ctrlTableView.displayRequests(filteredRequests);
+        } else if (value === statuses.archived.name) {
+            // Рендерим заархивированные элементы
+            ctrlTableView.displayRequests(ctrlModel.data.archived);
+            // Скрываем ссылку Редактировать у заархивированных элементов
+            ctrlTableView.hideArchivedElementLink();
         } else {
             // Записываем значения элемента по которому мы кликнули в обьект с фильтром в моделе
             ctrlModel.filter.fields[key] = value;
@@ -49,13 +54,13 @@ const tableController = ((ctrlModel, ctrlTableView) => {
         let keys = getObjectKeys(ctrlModel.filter.fields);
         // Обновляем фильтр по ключу status
         updateFilter(keys[1], e.target.dataset.filter);
-        // Рендерим зааахивированые элементы если клик произошел по фильтру Архив
-        if (e.target.getAttribute("data-filter") === statuses.archived.name) {
-            // Рендерим заархивированные элементы
-            ctrlTableView.displayRequests(ctrlModel.data.archived);
-            // Скрываем ссылку Редактировать у заархивированных элементов
-            ctrlTableView.hideArchivedElementLink();
-        }
+        // // Рендерим зааахивированые элементы если клик произошел по фильтру Архив
+        // if (e.target.getAttribute("data-filter") === statuses.archived.name) {
+        //     // Рендерим заархивированные элементы
+        //     ctrlTableView.displayRequests(ctrlModel.data.archived);
+        //     // Скрываем ссылку Редактировать у заархивированных элементов
+        //     ctrlTableView.hideArchivedElementLink();
+        // }
 
         // Сохранения значения фильтра в LS
         ctrlModel.filter.saveFilter();
@@ -85,8 +90,17 @@ const tableController = ((ctrlModel, ctrlTableView) => {
     }
 
     function test () {
-        const a = ctrlModel.filter.getFilter();
-        console.log("test -> a", a)
+        const requestStatus = ctrlModel.filter.getFilter().status;
+        const keys = getObjectKeys(ctrlModel.filter.fields)
+        updateFilter(keys[1], requestStatus)
+
+        // if (requestStatus === statuses.archived.name) {
+        //     // Рендерим заархивированные элементы
+        //     ctrlTableView.displayRequests(ctrlModel.data.archived);
+        //     // Скрываем ссылку Редактировать у заархивированных элементов
+        //     ctrlTableView.hideArchivedElementLink();
+        // }
+
     }
 
     return {
