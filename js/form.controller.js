@@ -56,5 +56,3 @@ const formController = ((ctrlModel, ctrlView) => {
 })(model, formView);
 
 formController.init();
-
-

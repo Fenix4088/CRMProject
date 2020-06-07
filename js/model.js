@@ -74,7 +74,6 @@ const model = (() => {
         return "+" + formatedPhoneNumber;
     }
 
-
     const data = {
         requestsDataBase: JSON.parse(localStorage.getItem("All Requests")) || [],
         archived: JSON.parse(localStorage.getItem("Archived")) || [],

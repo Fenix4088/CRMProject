@@ -54,13 +54,6 @@ const tableController = ((ctrlModel, ctrlTableView) => {
         let keys = getObjectKeys(ctrlModel.filter.fields);
         // Обновляем фильтр по ключу status
         updateFilter(keys[1], e.target.dataset.filter);
-        // // Рендерим зааахивированые элементы если клик произошел по фильтру Архив
-        // if (e.target.getAttribute("data-filter") === statuses.archived.name) {
-        //     // Рендерим заархивированные элементы
-        //     ctrlTableView.displayRequests(ctrlModel.data.archived);
-        //     // Скрываем ссылку Редактировать у заархивированных элементов
-        //     ctrlTableView.hideArchivedElementLink();
-        // }
 
         // Сохранения значения фильтра в LS
         ctrlModel.filter.saveFilter();
@@ -89,18 +82,14 @@ const tableController = ((ctrlModel, ctrlTableView) => {
         ctrlTableView.displayArchivedRequestsAmount(archivedRequestsAmount);
     }
 
-    function test () {
+    // Ф-я для фильтрации после перехода со страници Edit
+    function filterAfterLinking() {
         const requestStatus = ctrlModel.filter.getFilter().status;
-        const keys = getObjectKeys(ctrlModel.filter.fields)
-        updateFilter(keys[1], requestStatus)
-
-        // if (requestStatus === statuses.archived.name) {
-        //     // Рендерим заархивированные элементы
-        //     ctrlTableView.displayRequests(ctrlModel.data.archived);
-        //     // Скрываем ссылку Редактировать у заархивированных элементов
-        //     ctrlTableView.hideArchivedElementLink();
-        // }
-
+        const keys = getObjectKeys(ctrlModel.filter.fields);
+        // Обновление фильтра
+        updateFilter(keys[1], requestStatus);
+        // Доюавления класса active
+        ctrlTableView.addActiveClassAfterLinking(requestStatus);
     }
 
     return {
@@ -109,7 +98,7 @@ const tableController = ((ctrlModel, ctrlTableView) => {
             countNewRequests();
             countArchivedRequests();
             ctrlTableView.displayRequests(ctrlModel.data.requestsDataBase);
-            test();
+            filterAfterLinking();
         },
     };
 })(model, tableView);

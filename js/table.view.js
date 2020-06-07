@@ -52,6 +52,17 @@ const tableView = (() => {
         element.classList.add("active");
     }
 
+    // Добавление класса active боковому фильтпу после переходо со стр Edit
+    function addActiveClassAfterLinking(value) {
+        let linksArr = document.querySelector(tableDomStrings.asideFilter).children;
+        Array.from(linksArr).forEach((item) => {
+            item.firstElementChild.classList.remove("active");
+            if (item.firstElementChild.dataset.filter === value) {
+                item.firstElementChild.classList.add("active");
+            }
+        });
+    }
+
     //Ф-я подсчета новых заявок
     function displayNewRequestsAmount(number) {
         document.querySelector(tableDomStrings.newRequestsAmountBadge).innerText = number;
@@ -79,5 +90,6 @@ const tableView = (() => {
         displayNewRequestsAmount,
         displayArchivedRequestsAmount,
         displayRequests,
+        addActiveClassAfterLinking,
     };
 })();
