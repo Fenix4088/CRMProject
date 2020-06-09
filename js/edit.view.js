@@ -27,8 +27,9 @@ const editView = (() => {
         allInputs.name.value = obj.name;
         allInputs.email.value = obj.email;
         allInputs.phone.value = obj.phoneNumber;
-        determineCourseType(obj);
-        determineStatuse(obj);
+
+        allInputs.status.value = obj.status;
+        allInputs.courseSelect.value = obj.courseType;
     }
 
     //  Находим все поля формы
@@ -43,27 +44,6 @@ const editView = (() => {
             phone: document.querySelector(editDOMElements.curentRequestPhone),
             status: document.querySelector(editDOMElements.currentRequestStatus),
         };
-    }
-
-    //  Определяем курс выбранный пользователем
-    function determineCourseType(obj) {
-        const courseSelect = document.querySelector(editDOMElements.currentRequestCourse);
-        courseSelect.options;
-        Array.from(courseSelect.options).forEach((item) => {
-            if (item.value == obj.courseType) {
-                item.setAttribute("selected", "selected");
-            }
-        });
-    }
-
-    // Определяем заранее установленый статус заявки
-    function determineStatuse(obj) {
-        const statusSelect = document.querySelector(editDOMElements.currentRequestStatus);
-        Array.from(statusSelect.options).forEach((item) => {
-            if (item.value == obj.status) {
-                item.setAttribute("selected", "selected");
-            }
-        });
     }
 
     // Добавление активного класса к элементу бокового фильтра

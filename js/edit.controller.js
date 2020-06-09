@@ -54,7 +54,7 @@ const editController = ((ctrlModel, ctrlEditView) => {
         ctrlEditView.addActiveClass(e.target);
         const keys = Object.keys(ctrlModel.filter.fields);
         updateFilter(keys[1], e.target.dataset.filter);
-        ctrlModel.filter.saveFilter();
+        ctrlModel.filter.save();
     }
 
     // Ф-я для обновления фильтра
@@ -77,8 +77,10 @@ const editController = ((ctrlModel, ctrlEditView) => {
             }
             return item;
         });
+
         // Передаем измененный массив в LS
         localStorage.setItem("All Requests", JSON.stringify(changedArray));
+        
     }
 
     // Ф-я для создания хранилища для заархивированных элементов
@@ -96,8 +98,9 @@ const editController = ((ctrlModel, ctrlEditView) => {
         const currentRequest = findRequest();
         // 2 Определяем значения селектов которые были изменины
         // 2.1 Узнаем значения селекта выбора продукта
-        const courseSelectType = inputs.courseSelect.options[inputs.courseSelect.options.selectedIndex].value;
-        const courseSelectName = inputs.courseSelect.options[inputs.courseSelect.options.selectedIndex].innerText;
+        const options = inputs.courseSelect.options;
+        const courseSelectType = options[options.selectedIndex].value;
+        const courseSelectName = options[options.selectedIndex].innerText;
         // 2.2 Узнаем значение селекта статуса
         const newStatus = inputs.status.options[inputs.status.options.selectedIndex].innerText;
 

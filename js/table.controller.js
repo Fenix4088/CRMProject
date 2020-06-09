@@ -21,7 +21,7 @@ const tableController = ((ctrlModel, ctrlTableView) => {
             // Рендерим заархивированные элементы
             ctrlTableView.displayRequests(ctrlModel.data.archived);
             // Скрываем ссылку Редактировать у заархивированных элементов
-            ctrlTableView.hideArchivedElementLink();
+            ctrlTableView.hideEditLink();
         } else {
             // Записываем значения элемента по которому мы кликнули в обьект с фильтром в моделе
             ctrlModel.filter.fields[key] = value;
@@ -32,31 +32,23 @@ const tableController = ((ctrlModel, ctrlTableView) => {
         }
     }
 
-    // Ф-я определения ключей в обьекте с фильтром
-    function getObjectKeys(obj) {
-        let objKeys = Object.keys(obj);
-        return objKeys;
-    }
-
     // Фильтрация по названию продукта
     function filterByCourseName(e) {
-        let keys = getObjectKeys(ctrlModel.filter.fields);
         // Обновляем фильтр по ключу courseType
-        updateFilter(keys[0], e.target.value);
+        updateFilter('courseType', e.target.value);
         // Сохранения значения фильтра в LS
-        ctrlModel.filter.saveFilter();
+        ctrlModel.filter.save();
     }
 
     // Фильтрация по статусу
     function filterElementsByStatus(e) {
         // Добавляем активный класс к боковому фильтру
         ctrlTableView.addActiveClass(e.target);
-        let keys = getObjectKeys(ctrlModel.filter.fields);
         // Обновляем фильтр по ключу status
-        updateFilter(keys[1], e.target.dataset.filter);
+        updateFilter('status', e.target.dataset.filter);
 
         // Сохранения значения фильтра в LS
-        ctrlModel.filter.saveFilter();
+        ctrlModel.filter.save();
     }
 
     // Ф-я для фильтрации данных
@@ -84,8 +76,8 @@ const tableController = ((ctrlModel, ctrlTableView) => {
 
     // Ф-я для фильтрации после перехода со страници Edit
     function filterAfterLinking() {
-        const requestStatus = ctrlModel.filter.getFilter().status;
-        const keys = getObjectKeys(ctrlModel.filter.fields);
+        const requestStatus = ctrlModel.filter.set().status;
+        const keys = Object.keys(ctrlModel.filter.fields);
         // Обновление фильтра
         updateFilter(keys[1], requestStatus);
         // Доюавления класса active

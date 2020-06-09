@@ -15,12 +15,16 @@ const model = (() => {
     }
     // Ф-я для сохранения данных из главной формы в модель
     function saveRequestData(name, phoneNumber, email, courseType, courseName) {
-        let ID = 0;
+
+        let ID = 0;        
+         
         // Создаем уникальный идетификатор клиента
         if (data.requestsDataBase.length > 0) {
             const lastIndex = data.requestsDataBase.length - 1;
             ID = data.requestsDataBase[lastIndex].id + 1;
-        }
+            // Обновляем массив с данными после добавления каждого элемента
+            data.requestsDataBase = JSON.parse(localStorage.getItem("All Requests"));
+        }        
         // Создаем клиента
         const newRequest = new Request(
             ID,
@@ -32,6 +36,7 @@ const model = (() => {
             courseType,
             courseName
         );
+
         // Записываем данные по клиенту в основной массив
         data.requestsDataBase.push(newRequest);
         // Записываем данные по клиенту в LS
@@ -85,10 +90,10 @@ const model = (() => {
             status: "",
         },
 
-        getFilter: function () {
+        set: function () {
             return JSON.parse(localStorage.getItem("Filter")) || filter.fields;
         },
-        saveFilter: function () {
+        save: function () {
             localStorage.setItem("Filter", JSON.stringify(filter.fields));
         },
     };

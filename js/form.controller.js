@@ -20,7 +20,7 @@ const formController = ((ctrlModel, ctrlView) => {
                 requestInformation.requestCourseType,
                 optionText
             );
-
+            
             generateTestDatas.init(); //Генерируем тестовые данные клиентов
             ctrlModel.testInit(); //Выводим в консоль данные из массива данных о клиенте
             // ctrlView.clearFields(); //Очишаем поля формы

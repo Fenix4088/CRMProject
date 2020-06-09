@@ -74,7 +74,7 @@ const tableView = (() => {
     }
 
     // Ф-я для сокрытия ссылки Редактирования у заархивированного элемента
-    function hideArchivedElementLink() {
+    function hideEditLink() {
         const tbody = document.querySelector("tbody").querySelectorAll("[data-link]");
         tbody.forEach((item) => {
             item.classList.add("hide");
@@ -86,7 +86,7 @@ const tableView = (() => {
             return tableDomStrings;
         },
         addActiveClass,
-        hideArchivedElementLink,
+        hideEditLink,
         displayNewRequestsAmount,
         displayArchivedRequestsAmount,
         displayRequests,
