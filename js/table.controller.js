@@ -35,7 +35,7 @@ const tableController = ((ctrlModel, ctrlTableView) => {
     // Фильтрация по названию продукта
     function filterByCourseName(e) {
         // Обновляем фильтр по ключу courseType
-        updateFilter('courseType', e.target.value);
+        updateFilter("courseType", e.target.value);
         // Сохранения значения фильтра в LS
         ctrlModel.filter.save();
     }
@@ -45,7 +45,7 @@ const tableController = ((ctrlModel, ctrlTableView) => {
         // Добавляем активный класс к боковому фильтру
         ctrlTableView.addActiveClass(e.target);
         // Обновляем фильтр по ключу status
-        updateFilter('status', e.target.dataset.filter);
+        updateFilter("status", e.target.dataset.filter);
 
         // Сохранения значения фильтра в LS
         ctrlModel.filter.save();
@@ -75,14 +75,21 @@ const tableController = ((ctrlModel, ctrlTableView) => {
     }
 
     // Ф-я для фильтрации после перехода со страници Edit
-    function filterAfterLinking() {
-        const requestStatus = ctrlModel.filter.set().status;
-        const keys = Object.keys(ctrlModel.filter.fields);
-        // Обновление фильтра
-        updateFilter(keys[1], requestStatus);
-        // Доюавления класса active
-        ctrlTableView.addActiveClassAfterLinking(requestStatus);
-    }
+    // function filterAfterLinking() {
+    //     Object.keys(ctrlModel.filter.fields).forEach ( item => {
+    //         let filterType = ctrlModel.filter.set()[item];
+    //         updateFilter(item, filterType);
+    //         ctrlTableView.addActiveClassAfterLinking(filterType);
+    //         ctrlTableView.selectFilterValue(filterType);
+    //     });
+    // const requestStatus = ctrlModel.filter.set().status;
+    // const requestCourseType = ctrlModel.filter.set().courseType;
+    // // Обновление фильтра
+    // updateFilter('status', requestStatus);
+    // updateFilter('courseType', requestCourseType);
+    // // Доюавления класса active
+    // ctrlTableView.addActiveClassAfterLinking(requestStatus);
+    // }
 
     return {
         init: function () {
@@ -90,7 +97,16 @@ const tableController = ((ctrlModel, ctrlTableView) => {
             countNewRequests();
             countArchivedRequests();
             ctrlTableView.displayRequests(ctrlModel.data.requestsDataBase);
-            filterAfterLinking();
+            // Отображение сохраненных настроек фильтра при инициализации
+            Object.keys(ctrlModel.filter.fields).forEach((item) => {
+                let filterType = ctrlModel.filter.set()[item];
+                updateFilter(item, filterType);
+                if (item == "status") {
+                    ctrlTableView.addActiveClassAfterLinking(filterType);
+                } else {
+                    ctrlTableView.selectFilterValue(filterType);
+                }
+            });
         },
     };
 })(model, tableView);

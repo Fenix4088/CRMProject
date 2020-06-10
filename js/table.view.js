@@ -55,12 +55,14 @@ const tableView = (() => {
     // Добавление класса active боковому фильтпу после переходо со стр Edit
     function addActiveClassAfterLinking(value) {
         let linksArr = document.querySelector(tableDomStrings.asideFilter).children;
+
         Array.from(linksArr).forEach((item) => {
             item.firstElementChild.classList.remove("active");
             if (item.firstElementChild.dataset.filter === value) {
                 item.firstElementChild.classList.add("active");
             }
         });
+
     }
 
     //Ф-я подсчета новых заявок
@@ -81,6 +83,15 @@ const tableView = (() => {
         });
     }
 
+    function selectFilterValue(value) {
+        let a = document.querySelector(tableDomStrings.courseFilter);
+        Array.from(a).forEach( item => {
+            if( item.value === value ) {
+                item.selected = true;
+            }
+        })
+    }
+
     return {
         getTableDOMElements: function () {
             return tableDomStrings;
@@ -91,5 +102,6 @@ const tableView = (() => {
         displayArchivedRequestsAmount,
         displayRequests,
         addActiveClassAfterLinking,
+        selectFilterValue,
     };
 })();

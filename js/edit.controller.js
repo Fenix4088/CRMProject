@@ -27,12 +27,11 @@ const editController = ((ctrlModel, ctrlEditView) => {
         // Обновляем data доюавляем туда обьект с новыми значениями(вместо старого)
         updateRequestsData(changedRequest);
     }
-
     // Ф-я для удаления заявки в архив
     function deleteRequest(e) {
         // e.preventDefault();
         const currentRequest = findRequest();
-        const cloneCurrentRequest = Object.assign(currentRequest, {
+        const currentRequestClone = Object.assign(currentRequest, {
             statusLabel: `${statuses.archived.label}`,
             status: `${statuses.archived.name}`,
         });
@@ -44,7 +43,7 @@ const editController = ((ctrlModel, ctrlEditView) => {
             }
 
             // Обновляем data доюавляем туда обьект с новыми значениями(вместо старого)
-            updateRequestsData(cloneCurrentRequest);
+            updateRequestsData(currentRequestClone);
         });
     }
 
@@ -52,8 +51,8 @@ const editController = ((ctrlModel, ctrlEditView) => {
     function goBackToFilter(e) {
         // e.preventDefault();
         ctrlEditView.addActiveClass(e.target);
-        const keys = Object.keys(ctrlModel.filter.fields);
-        updateFilter(keys[1], e.target.dataset.filter);
+        // const keys = Object.keys(ctrlModel.filter.fields);
+        updateFilter("status", e.target.dataset.filter);
         ctrlModel.filter.save();
     }
 
@@ -80,7 +79,6 @@ const editController = ((ctrlModel, ctrlEditView) => {
 
         // Передаем измененный массив в LS
         localStorage.setItem("All Requests", JSON.stringify(changedArray));
-        
     }
 
     // Ф-я для создания хранилища для заархивированных элементов
@@ -106,7 +104,7 @@ const editController = ((ctrlModel, ctrlEditView) => {
 
         const newStatusValue = inputs.status.options[inputs.status.options.selectedIndex].value;
 
-        const cloneCurrentRequest = Object.assign(currentRequest, {
+        const currentRequestClone = Object.assign(currentRequest, {
             name: `${inputs.name.value}`,
             email: `${inputs.email.value}`,
             phoneNumber: `${inputs.phone.value}`,
@@ -115,7 +113,7 @@ const editController = ((ctrlModel, ctrlEditView) => {
             statusLabel: `${newStatus}`,
             status: `${newStatusValue}`,
         });
-        return cloneCurrentRequest;
+        return currentRequestClone;
     }
 
     //   Ф-я для определения нового статуса
@@ -139,7 +137,7 @@ const editController = ((ctrlModel, ctrlEditView) => {
         init: function () {
             editCurrentRequest();
             countNewRequests();
-            countArchivedRequests()
+            countArchivedRequests();
         },
     };
 })(model, editView);
