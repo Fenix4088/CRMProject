@@ -4,6 +4,8 @@ const editController = ((ctrlModel, ctrlEditView) => {
     document.querySelector(editDOMElements.saveBtn).addEventListener("click", changingRequest);
     document.querySelector(editDOMElements.deleteBtn).addEventListener("click", deleteRequest);
     document.querySelector(editDOMElements.asideFilter).addEventListener("click", goBackToFilter);
+    // Записываем текущий запрос в переменную
+    const currentRequest = findRequest();
 
     // Находим обьект запроса по id из строки запроса
     function findRequest() {
@@ -13,7 +15,7 @@ const editController = ((ctrlModel, ctrlEditView) => {
 
     // Ф-я получения редактировангого обьекта
     function editCurrentRequest() {
-        const currentRequest = findRequest();
+        // const currentRequest = findRequest();
         // Изменяем данные редактируемго обьекта
         ctrlEditView.displayRequestData(currentRequest);
     }
@@ -30,7 +32,7 @@ const editController = ((ctrlModel, ctrlEditView) => {
     // Ф-я для удаления заявки в архив
     function deleteRequest(e) {
         // e.preventDefault();
-        const currentRequest = findRequest();
+        // const currentRequest = findRequest();
         const currentRequestClone = Object.assign(currentRequest, {
             statusLabel: `${statuses.archived.label}`,
             status: `${statuses.archived.name}`,
@@ -51,7 +53,6 @@ const editController = ((ctrlModel, ctrlEditView) => {
     function goBackToFilter(e) {
         // e.preventDefault();
         ctrlEditView.addActiveClass(e.target);
-        // const keys = Object.keys(ctrlModel.filter.fields);
         updateFilter("status", e.target.dataset.filter);
         ctrlModel.filter.save();
     }
@@ -93,7 +94,7 @@ const editController = ((ctrlModel, ctrlEditView) => {
     //   Ф-я для создания измененного обьекта при сохранении
     function collectNewValues(inputs) {
         // 1  Берем текущий запрос
-        const currentRequest = findRequest();
+        // const currentRequest = findRequest();
         // 2 Определяем значения селектов которые были изменины
         // 2.1 Узнаем значения селекта выбора продукта
         const options = inputs.courseSelect.options;

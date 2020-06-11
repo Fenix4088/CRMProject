@@ -34,7 +34,6 @@ const editView = (() => {
 
     //  Находим все поля формы
     function findInputs() {
-        
         return {
             id: document.querySelector(editDOMElements.currentRequestID),
             date: document.querySelector(editDOMElements.currentRequestDate),

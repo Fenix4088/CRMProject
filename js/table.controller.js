@@ -9,7 +9,7 @@ const tableController = ((ctrlModel, ctrlTableView) => {
     document.querySelector(tableDomStrings.asideFilter).addEventListener("click", filterElementsByStatus);
 
     // Ф-я обновления фильтра
-    function updateFilter(key, value) {
+    function updateData(key, value) {
         if (value === "all") {
             // Присваеваем обьекту значение в виде пустой строки
             ctrlModel.filter.fields[key] = "";
@@ -35,7 +35,7 @@ const tableController = ((ctrlModel, ctrlTableView) => {
     // Фильтрация по названию продукта
     function filterByCourseName(e) {
         // Обновляем фильтр по ключу courseType
-        updateFilter("courseType", e.target.value);
+        updateData("courseType", e.target.value);
         // Сохранения значения фильтра в LS
         ctrlModel.filter.save();
     }
@@ -45,7 +45,7 @@ const tableController = ((ctrlModel, ctrlTableView) => {
         // Добавляем активный класс к боковому фильтру
         ctrlTableView.addActiveClass(e.target);
         // Обновляем фильтр по ключу status
-        updateFilter("status", e.target.dataset.filter);
+        updateData("status", e.target.dataset.filter);
 
         // Сохранения значения фильтра в LS
         ctrlModel.filter.save();
@@ -74,23 +74,6 @@ const tableController = ((ctrlModel, ctrlTableView) => {
         ctrlTableView.displayArchivedRequestsAmount(archivedRequestsAmount);
     }
 
-    // Ф-я для фильтрации после перехода со страници Edit
-    // function filterAfterLinking() {
-    //     Object.keys(ctrlModel.filter.fields).forEach ( item => {
-    //         let filterType = ctrlModel.filter.set()[item];
-    //         updateFilter(item, filterType);
-    //         ctrlTableView.addActiveClassAfterLinking(filterType);
-    //         ctrlTableView.selectFilterValue(filterType);
-    //     });
-    // const requestStatus = ctrlModel.filter.set().status;
-    // const requestCourseType = ctrlModel.filter.set().courseType;
-    // // Обновление фильтра
-    // updateFilter('status', requestStatus);
-    // updateFilter('courseType', requestCourseType);
-    // // Доюавления класса active
-    // ctrlTableView.addActiveClassAfterLinking(requestStatus);
-    // }
-
     return {
         init: function () {
             console.log("CRM requests list started!");
@@ -100,7 +83,7 @@ const tableController = ((ctrlModel, ctrlTableView) => {
             // Отображение сохраненных настроек фильтра при инициализации
             Object.keys(ctrlModel.filter.fields).forEach((item) => {
                 let filterType = ctrlModel.filter.set()[item];
-                updateFilter(item, filterType);
+                updateData(item, filterType);
                 if (item == "status") {
                     ctrlTableView.addActiveClassAfterLinking(filterType);
                 } else {
