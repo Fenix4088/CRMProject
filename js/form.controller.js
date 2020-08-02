@@ -1,18 +1,18 @@
 const formController = ((ctrlModel, ctrlView) => {
-    // Берем из шаблога обьект с формой и ее элементами
+    // We take an object from the template with a form and its elements
     const formDOM = ctrlView.getDOMElements();
 
     document.querySelector(formDOM.formMain).addEventListener("submit", createRequest);
 
-    // Ф-я создания заявки
+    // Form of application creation
     function createRequest(e) {
         e.preventDefault();
         if (ctrlView.formValidation()) {
-            // Собираем значения из формы и записываем их в переменную
+            // Collecting values ​​from the form and writing them to a variable
             const requestInformation = collectRequestInformation();
-            // Определяем текстовую ноду выбранного option
+            // Determine the text node of the selected option
             const optionText = findOptionText().innerText;
-            // Передаем данные по клиенту в модель
+            // We transfer customer data to the model
             ctrlModel.saveRequestData(
                 requestInformation.requestName,
                 requestInformation.requestPhone,
@@ -20,14 +20,14 @@ const formController = ((ctrlModel, ctrlView) => {
                 requestInformation.requestCourseType,
                 optionText
             );
-            
-            generateTestDatas.init(); //Генерируем тестовые данные клиентов
-            ctrlModel.testInit(); //Выводим в консоль данные из массива данных о клиенте
-            // ctrlView.clearFields(); //Очишаем поля формы
+
+            generateTestDatas.init(); //Generating customer test data
+            ctrlModel.testInit(); //Displaying data from the client data array to the console
+            // ctrlView.clearFields(); //Clear form fields
         }
     }
 
-    // Ф-я для сбора информации из формы Заявок
+    // F-I for collecting information from the Application form
     function collectRequestInformation() {
         const requestName = document.querySelector(formDOM.fullName).value;
         const requestPhone = document.querySelector(formDOM.phone).value;
@@ -42,7 +42,7 @@ const formController = ((ctrlModel, ctrlView) => {
         };
     }
 
-    // Ф-я для определения текстовой ноды option который выбран
+    // F-i to define the text node option which is selected
     function findOptionText() {
         const formSelect = document.querySelector(formDOM.mainFormSelect);
         return formSelect.options[formSelect.options.selectedIndex];

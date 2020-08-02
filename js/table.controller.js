@@ -1,57 +1,57 @@
 const tableController = ((ctrlModel, ctrlTableView) => {
     const tableDomStrings = ctrlTableView.getTableDOMElements();
 
-    // Изменения в фильтре по продукту
+    // Changes in the filter by product
     document.querySelector(tableDomStrings.courseFilter).addEventListener("change", filterByCourseName);
-    // Клик по верхнему фильтру
+    // Click on the top filter
     document.querySelector(tableDomStrings.topFilter).addEventListener("click", filterElementsByStatus);
-    // Клик по боковому фильтру
+    // Click on the side filter
     document.querySelector(tableDomStrings.asideFilter).addEventListener("click", filterElementsByStatus);
 
-    // Ф-я обновления фильтра
+    // Filter update function
     function updateData(key, value) {
         if (value === "all") {
-            // Присваеваем обьекту значение в виде пустой строки
+            // Assigning an empty string to the object
             ctrlModel.filter.fields[key] = "";
-            // Фильтруем элементы
+            // Filtering elements
             const filteredRequests = filterData(ctrlModel.data.requestsDataBase);
-            // Вывод данных на экран
+            // Displaying data on the screen
             ctrlTableView.displayRequests(filteredRequests);
         } else if (value === statuses.archived.name) {
-            // Рендерим заархивированные элементы
+            // Rendering archived items
             ctrlTableView.displayRequests(ctrlModel.data.archived);
-            // Скрываем ссылку Редактировать у заархивированных элементов
+            // Hide the Edit link on archived items
             ctrlTableView.hideEditLink();
         } else {
-            // Записываем значения элемента по которому мы кликнули в обьект с фильтром в моделе
+            // We write the values ​​of the element on which we clicked into an object with a filter in the model
             ctrlModel.filter.fields[key] = value;
-            // Фильтруем данные в зависимости от статуса
+            // We filter data depending on the status
             const filteredRequests = filterData(ctrlModel.data.requestsDataBase);
-            // Вывод отфильтрованных данных на экран
+            // Displaying filtered data on the screen
             ctrlTableView.displayRequests(filteredRequests);
         }
     }
 
-    // Фильтрация по названию продукта
+    // Filter by product name
     function filterByCourseName(e) {
-        // Обновляем фильтр по ключу courseType
+        // Updating the filter by courseType key
         updateData("courseType", e.target.value);
-        // Сохранения значения фильтра в LS
+        // Saving filter value in LS
         ctrlModel.filter.save();
     }
 
-    // Фильтрация по статусу
+    // Filtering by status
     function filterElementsByStatus(e) {
-        // Добавляем активный класс к боковому фильтру
+        // Adding the active class to the side filter
         ctrlTableView.addActiveClass(e.target);
-        // Обновляем фильтр по ключу status
+        // Updating the filter by the status key
         updateData("status", e.target.dataset.filter);
 
-        // Сохранения значения фильтра в LS
+        // Saving filter value in LS
         ctrlModel.filter.save();
     }
 
-    // Ф-я для фильтрации данных
+    //Function for data filtering
     function filterData(data) {
         let requests = data;
         Object.keys(ctrlModel.filter.fields).forEach((item) => {
@@ -62,13 +62,13 @@ const tableController = ((ctrlModel, ctrlTableView) => {
         return requests;
     }
 
-    // Ф-я для подсчета новых заявок
+    // Function for counting new applications
     function countNewRequests() {
         const newRequestsAmount = ctrlModel.data.requestsDataBase.filter((item) => item.status === statuses.new.name);
         ctrlTableView.displayNewRequestsAmount(newRequestsAmount.length);
     }
 
-    // Ф-я для подсчета заархивированных заявок
+    // Function for counting archived applications
     function countArchivedRequests() {
         const archivedRequestsAmount = ctrlModel.data.archived.length;
         ctrlTableView.displayArchivedRequestsAmount(archivedRequestsAmount);
@@ -80,7 +80,7 @@ const tableController = ((ctrlModel, ctrlTableView) => {
             countNewRequests();
             countArchivedRequests();
             ctrlTableView.displayRequests(ctrlModel.data.requestsDataBase);
-            // Отображение сохраненных настроек фильтра при инициализации
+            // Display of the saved filter settings during initialization
             Object.keys(ctrlModel.filter.fields).forEach((item) => {
                 let filterType = ctrlModel.filter.set()[item];
                 updateData(item, filterType);

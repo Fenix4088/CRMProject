@@ -1,35 +1,35 @@
 const editController = ((ctrlModel, ctrlEditView) => {
     const editDOMElements = ctrlEditView.getEditDOMElents();
-    // Клик по кнопке сохранить
+    // Click on the save button
     document.querySelector(editDOMElements.saveBtn).addEventListener("click", changingRequest);
     document.querySelector(editDOMElements.deleteBtn).addEventListener("click", deleteRequest);
     document.querySelector(editDOMElements.asideFilter).addEventListener("click", goBackToFilter);
-    // Записываем текущий запрос в переменную
+    // We write the current request to a variable
     const currentRequest = findRequest();
 
-    // Находим обьект запроса по id из строки запроса
+    // Find the request object by id from the query string
     function findRequest() {
         const currentRequestId = parseInt(window.location.search.split("=")[1]);
         return ctrlModel.data.requestsDataBase.find((item) => item.id == currentRequestId);
     }
 
-    // Ф-я получения редактировангого обьекта
+    // Function of receiving the edited object
     function editCurrentRequest() {
         // const currentRequest = findRequest();
-        // Изменяем данные редактируемго обьекта
+        // Changing the data of the edited object
         ctrlEditView.displayRequestData(currentRequest);
     }
 
-    // Ф-я изменения текущего запроса
+    // Function change the current request
     function changingRequest(e) {
         // e.preventDefault();
         const formInputs = ctrlEditView.findInputs();
-        // Фиксируем все изменения в запросе
+        // We commit all changes in the request
         const changedRequest = collectNewValues(formInputs);
-        // Обновляем data доюавляем туда обьект с новыми значениями(вместо старого)
+        // Update data add an object with new values ​​(instead of the old one)
         updateRequestsData(changedRequest);
     }
-    // Ф-я для удаления заявки в архив
+    // Function for deleting the application to the archive
     function deleteRequest(e) {
         // e.preventDefault();
         // const currentRequest = findRequest();
@@ -44,12 +44,12 @@ const editController = ((ctrlModel, ctrlEditView) => {
                 archivingElement(archivedElementIndex);
             }
 
-            // Обновляем data доюавляем туда обьект с новыми значениями(вместо старого)
+            // Update data add an object with new values ​​(instead of the old one)
             updateRequestsData(currentRequestClone);
         });
     }
 
-    // Ф-я для перехода к фильтру
+    // Function to go to the filter
     function goBackToFilter(e) {
         // e.preventDefault();
         ctrlEditView.addActiveClass(e.target);
@@ -57,20 +57,20 @@ const editController = ((ctrlModel, ctrlEditView) => {
         ctrlModel.filter.save();
     }
 
-    // Ф-я для обновления фильтра
+    // Function to update the filter
     function updateFilter(key, value) {
         if (value === "all") {
-            // Присваеваем обьекту значение в виде пустой строки
+            // Assigning an empty string to the object
             ctrlModel.filter.fields[key] = "";
         } else {
-            // Записываем значения элемента по которому мы кликнули в обьект с фильтром в моделе
+            // We write the values ​​of the element on which we clicked into an object with a filter in the model
             ctrlModel.filter.fields[key] = value;
         }
     }
 
-    // Ф-я обновления массива с данными
+    // Function update an array with data
     function updateRequestsData(newRequest) {
-        // Определяем элемент в общем в массиве, сравниваем новый элемент со старым по id
+        // Determine the element in general in the array, compare the new element with the old one by id
         const changedArray = ctrlModel.data.requestsDataBase.map((item) => {
             if (item.id === newRequest.id) {
                 return newRequest;
@@ -78,11 +78,11 @@ const editController = ((ctrlModel, ctrlEditView) => {
             return item;
         });
 
-        // Передаем измененный массив в LS
+        // Pass the modified array to LS
         localStorage.setItem("All Requests", JSON.stringify(changedArray));
     }
 
-    // Ф-я для создания хранилища для заархивированных элементов
+    // Function to create a repository for archived items
     function archivingElement(index) {
         const archivedElement = ctrlModel.data.requestsDataBase.splice(index, 1);
         if (!ctrlModel.data.archived.includes(archivedElement[0])) {
@@ -91,16 +91,16 @@ const editController = ((ctrlModel, ctrlEditView) => {
         localStorage.setItem("Archived", JSON.stringify(ctrlModel.data.archived));
     }
 
-    //   Ф-я для создания измененного обьекта при сохранении
+    //   Function to create a modified object when saving
     function collectNewValues(inputs) {
-        // 1  Берем текущий запрос
+        // 1  We take the current request
         // const currentRequest = findRequest();
-        // 2 Определяем значения селектов которые были изменины
-        // 2.1 Узнаем значения селекта выбора продукта
+        // 2 Determine the values ​​of the selects that have been changed
+        // 2.1 Find out the values ​​of the product selection select
         const options = inputs.courseSelect.options;
         const courseSelectType = options[options.selectedIndex].value;
         const courseSelectName = options[options.selectedIndex].innerText;
-        // 2.2 Узнаем значение селекта статуса
+        // 2.2 Find out the meaning of the status select
         const newStatus = inputs.status.options[inputs.status.options.selectedIndex].innerText;
 
         const newStatusValue = inputs.status.options[inputs.status.options.selectedIndex].value;
@@ -117,18 +117,18 @@ const editController = ((ctrlModel, ctrlEditView) => {
         return currentRequestClone;
     }
 
-    //   Ф-я для определения нового статуса
+    //   Function to determine the new status
     function determineChangedStyatus() {
         const courseSelect = document.querySelector(editDOMElements.currentRequestCourse);
     }
 
-    // Ф-я для подсчета новых заявок
+    // Function for counting new applications
     function countNewRequests() {
         const newRequestsAmount = ctrlModel.data.requestsDataBase.filter((item) => item.status === statuses.new.name);
         ctrlEditView.displayNewRequestsAmount(newRequestsAmount.length);
     }
 
-    // Ф-я для подсчета заархивированных заявок
+    // Function for counting archived applications
     function countArchivedRequests() {
         const archivedRequestsAmount = ctrlModel.data.archived.length;
         ctrlEditView.displayArchivedRequestsAmount(archivedRequestsAmount);

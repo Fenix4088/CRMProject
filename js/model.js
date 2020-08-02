@@ -13,19 +13,18 @@ const model = (() => {
             this.statusLabel = statuses.new.label;
         }
     }
-    // Ф-я для сохранения данных из главной формы в модель
+    // Function for saving data from the main form to the model
     function saveRequestData(name, phoneNumber, email, courseType, courseName) {
+        let ID = 0;
 
-        let ID = 0;        
-         
-        // Создаем уникальный идетификатор клиента
+        // We create a unique client identifier
         if (data.requestsDataBase.length > 0) {
             const lastIndex = data.requestsDataBase.length - 1;
             ID = data.requestsDataBase[lastIndex].id + 1;
-            // Обновляем массив с данными после добавления каждого элемента
+            // Updating the array with data after adding each element
             data.requestsDataBase = JSON.parse(localStorage.getItem("All Requests"));
-        }        
-        // Создаем клиента
+        }
+        // We create a client
         const newRequest = new Request(
             ID,
             determineRequestDate(),
@@ -37,13 +36,13 @@ const model = (() => {
             courseName
         );
 
-        // Записываем данные по клиенту в основной массив
+        // Writing customer data to the main array
         data.requestsDataBase.push(newRequest);
-        // Записываем данные по клиенту в LS
+        // We write data on the client in LS
         localStorage.setItem("All Requests", JSON.stringify(data.requestsDataBase));
     }
 
-    // Ф-я для форматирования даты заполнения заявки
+    // Function to format the date of filling the application
     function determineRequestDate() {
         const date = new Date();
         let day = formatNumber(date.getDate());
@@ -53,7 +52,7 @@ const model = (() => {
         return fullDate;
     }
 
-    // Ф-я для определения времени создания заявки
+    // Function to determine the time of creation of the application
     function determineRequestTime() {
         const date = new Date();
         let hours = formatNumber(date.getHours());
@@ -62,12 +61,12 @@ const model = (() => {
         return `${hours}:${minutes}:${seconds}`;
     }
 
-    // Ф-я для форматирования времени и даты
+    // Function for formatting time and date
     function formatNumber(value) {
         return value > 9 ? value : `0${value}`;
     }
 
-    // Ф-я для форматирования номера телфона
+    // Function to format the phone number
     function formatPhoneNumber(phoneNumber) {
         let newStr = String(phoneNumber);
         let newStrArr = newStr.split("");

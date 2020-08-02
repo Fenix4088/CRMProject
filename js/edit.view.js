@@ -18,7 +18,7 @@ const editView = (() => {
         archivedRequestsAmounBadge: "[data-archived-amount]",
     };
 
-    //  Выводим в поля формы, данные редактируемого запроса
+    //  We display the data of the edited request in the form fields
     function displayRequestData(obj) {
         let allInputs = findInputs();
         allInputs.id.innerText = obj.id;
@@ -32,7 +32,7 @@ const editView = (() => {
         allInputs.courseSelect.value = obj.courseType;
     }
 
-    //  Находим все поля формы
+    //  Finding all form fields
     function findInputs() {
         return {
             id: document.querySelector(editDOMElements.currentRequestID),
@@ -46,7 +46,7 @@ const editView = (() => {
         };
     }
 
-    // Добавление активного класса к элементу бокового фильтра
+    // Adding an Active Class to a Side Filter Element
     function addActiveClass(element) {
         const filterList = element.parentElement.parentElement;
         if (filterList.querySelector(".active")) {
@@ -55,12 +55,12 @@ const editView = (() => {
         element.classList.add("active");
     }
 
-    //Ф-я подсчета новых заявок
+    //function for counting new applications
     function displayNewRequestsAmount(number) {
         document.querySelector(editDOMElements.newRequestsAmountBadge).innerText = number;
     }
 
-    // Ф-я для вывода на экраг количества заархивированных заявок
+    // Function for displaying the number of archived orders on the screen
     function displayArchivedRequestsAmount(number) {
         document.querySelector(editDOMElements.archivedRequestsAmounBadge).innerText = number;
     }

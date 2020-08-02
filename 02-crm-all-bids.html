@@ -2,7 +2,7 @@
 <html lang="ru">
     <head>
         <meta charset="UTF-8" />
-        <title>02 - Все заявки</title>
+        <title>02 - All applications</title>
         <link rel="stylesheet" href="libs/bootstrap/css/bootstrap.min.css" />
         <link rel="stylesheet" href="css/main.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
@@ -15,10 +15,7 @@
         <div class="left-panel blue-skin">
             <!-- Logo -->
             <div class="left-panel__logo">
-                <div class="left-panel__logo-title">CRM заявки</div>
-                <div class="left-panel__logo-subtitle">
-                    учебный проект webcademy
-                </div>
+                <div class="left-panel__logo-title">CRM applications</div>
             </div>
             <!-- // Logo -->
             <!-- User -->
@@ -26,23 +23,23 @@
                 <div class="left-panel__user-photo">
                     <img src="img/avatars/avatar-128.jpg" alt="Avatar" />
                 </div>
-                <div class="left-panel__user-name">Петр <br />Васильевич</div>
+                <div class="left-panel__user-name">Joe<br />Peterson</div>
             </div>
             <!-- // User -->
             <!-- Navigation 1 -->
             <div class="left-panel__navigation">
                 <div class="left-panel__navigation-title">
-                    Заявки
+                    Applications
                 </div>
                 <ul data-aside-filter>
-                    <li><a data-filter="all" data-aside href="#" class="active">Все вместе</a></li>
+                    <li><a data-filter="all" data-aside href="#" class="active">All</a></li>
                     <li>
-                        <a data-filter="new" data-aside href="#">Новые<span data-new-amount class="badge counter">12</span></a>
+                        <a data-filter="new" data-aside href="#">New<span data-new-amount class="badge counter">12</span></a>
                     </li>
-                    <li><a data-filter="inProgress" data-aside href="#">В работе</a></li>
-                    <li><a data-filter="finished" data-aside href="#">Завершенные</a></li>
+                    <li><a data-filter="inProgress" data-aside href="#">In work</a></li>
+                    <li><a data-filter="finished" data-aside href="#">Completed</a></li>
                     <li>
-                        <a data-filter="archived" data-aside href="#">Архив<span data-archived-amount class="badge counter">12</span></a>
+                        <a data-filter="archived" data-aside href="#">Archive<span data-archived-amount class="badge counter">12</span></a>
                     </li>
                 </ul>
             </div>
@@ -50,18 +47,18 @@
             <!-- Navigation 2 -->
             <div class="left-panel__navigation">
                 <div class="left-panel__navigation-title">
-                    Продукты
+                    Products
                 </div>
                 <ul>
-                    <li><a href="#">Активные</a></li>
-                    <li><a href="#">Архив</a></li>
+                    <li><a href="#">Active</a></li>
+                    <li><a href="#">Archive</a></li>
                 </ul>
             </div>
             <!-- // Navigation 2 -->
             <!-- Navigation 3 -->
             <div class="left-panel__navigation left-panel__navigation--no-line">
                 <ul>
-                    <li><a href="#">Выход</a></li>
+                    <li><a href="#">Output</a></li>
                 </ul>
             </div>
             <!-- // Navigation 3 -->
@@ -71,7 +68,7 @@
         <!-- main-wrapper -->
         <div class="main-wrapper">
             <div class="container-fluid">
-                <div class="admin-heading-1">Все заявки</div>
+                <div class="admin-heading-1">All applications</div>
 
                 <form action="">
                     <!-- <div class="form-row"> -->
@@ -79,23 +76,23 @@
                         <!-- Col -->
                         <div class="col">
                             <div data-top-filter class="btn-group" role="group" aria-label="...">
-                                <a data-filter="all" href="#" class="btn btn-light">Все</a>
-                                <a data-filter="new" href="#" class="btn btn-light">Новые</a>
-                                <a data-filter="inProgress" href="#" class="btn btn-light">В работе</a>
-                                <a data-filter="finished" href="#" class="btn btn-light">Завершенные</a>
-                                <a data-filter="archived" href="#" class="btn btn-light">Архив</a>
+                                <a data-filter="all" href="#" class="btn btn-light">All</a>
+                                <a data-filter="new" href="#" class="btn btn-light">New</a>
+                                <a data-filter="inProgress" href="#" class="btn btn-light">In work</a>
+                                <a data-filter="finished" href="#" class="btn btn-light">Completed</a>
+                                <a data-filter="archived" href="#" class="btn btn-light">Archive</a>
                             </div>
                         </div>
                         <!-- // Col -->
                         <!-- Col -->
                         <div class="col">
                             <select class="custom-select" id="groupSelect">
-                                <option value="all">Все продукты</option>
-                                <option value="html">Курс по верстке</option>
-                                <option value="js">Курс по JavaScript</option>
-                                <option value="vue">Курс по VUE JS</option>
-                                <option value="php">Курс по PHP</option>
-                                <option value="wordpress">Курс по WordPress</option>
+                                <option value="all">All</option>
+                                <option value="html">HTML/CSS course</option>
+                                <option value="js">JavaScript course</option>
+                                <option value="vue">VUE JS course</option>
+                                <option value="php">PHP course</option>
+                                <option value="wordpress">WordPress course</option>
                             </select>
                         </div>
                         <!-- // Col -->
@@ -106,12 +103,12 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>дата</th>
-                            <th>продукт</th>
-                            <th>имя</th>
+                            <th>date</th>
+                            <th>product</th>
+                            <th>name</th>
                             <th>email</th>
-                            <th>телефон</th>
-                            <th>статус</th>
+                            <th>phone</th>
+                            <th>status</th>
                             <th></th>
                         </tr>
                     </thead>

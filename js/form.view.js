@@ -6,19 +6,19 @@ const formView = (() => {
         courseType: "[data-courses]",
         formMain: "#main-form",
         mainFormSelect: "#formSelect",
-        // Блоки предупреждающих сообщений
+        // Warning message blocks
         warningName: "[data-warning-name]",
         warningPhone: "[data-warning-phone]",
         warningEmail: "[data-warning-email]",
     };
-    // Ф-я очистки полей формы
+    // Function clear form fields
     function clearFields() {
         document.querySelector(formDomStrings.fullName).value = "";
         document.querySelector(formDomStrings.phone).value = "";
         document.querySelector(formDomStrings.email).value = "";
     }
 
-    // Ф-я валидации формы
+    // Function form validation
     function formValidation() {
         const nameInput = document.querySelector(formDomStrings.fullName);
         const phoneInput = document.querySelector(formDomStrings.phone);
@@ -49,7 +49,7 @@ const formView = (() => {
         return formVal;
     }
 
-    // Регулярное выражение email
+    // Regular expression email
     function validateEmailReg(email) {
         var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return re.test(email);

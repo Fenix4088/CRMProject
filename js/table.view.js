@@ -12,7 +12,7 @@ const tableView = (() => {
         archivedRequestsAmounBadge: "[data-archived-amount]",
     };
 
-    // Ф-я отображения заявок
+    // Function display applications
     function displayRequestInfo(obj) {
         const mainTableBody = document.querySelector(tableDomStrings.mainTable).querySelector("tbody");
 
@@ -29,21 +29,21 @@ const tableView = (() => {
                         </div>
                         </td>
                         <td>
-                        <a data-link="edit" href="03-crm-edit-bid.html?id=${obj.id}">Редактировать</a>
+                        <a data-link="edit" href="03-crm-edit-bid.html?id=${obj.id}">Edit</a>
                         </td>
                     </tr>`;
         mainTableBody.insertAdjacentHTML("beforeend", tableRow);
     }
 
-    // Перебор и отображение элементов
+    // Iteration and display of elements
     function displayRequests(requests) {
-        // Очистка полей tbody
+        // Clearing tbody fields
         document.querySelector(`${tableDomStrings.mainTable} > tbody`).innerHTML = "";
-        // Перебор элементов массива и рендеринг
+        // Looping through array elements and rendering
         requests.forEach((item) => displayRequestInfo(item));
     }
 
-    // Добавление активного класса к элементу бокового фильтра
+    // Adding an Active Class to a Side Filter Element
     function addActiveClass(element) {
         const filterList = element.parentElement.parentElement;
         if (filterList.querySelector(".active")) {
@@ -52,7 +52,7 @@ const tableView = (() => {
         element.classList.add("active");
     }
 
-    // Добавление класса active боковому фильтпу после переходо со стр Edit
+    // Adding the active class to the side filter after jumping from the Edit page
     function addActiveClassAfterLinking(value) {
         let linksArr = document.querySelector(tableDomStrings.asideFilter).children;
 
@@ -62,20 +62,19 @@ const tableView = (() => {
                 item.firstElementChild.classList.add("active");
             }
         });
-
     }
 
-    //Ф-я подсчета новых заявок
+    //Phase of counting new applications
     function displayNewRequestsAmount(number) {
         document.querySelector(tableDomStrings.newRequestsAmountBadge).innerText = number;
     }
 
-    // Ф-я для вывода на экраг количества заархивированных заявок
+    // Function for displaying the number of archived orders on the screen
     function displayArchivedRequestsAmount(number) {
         document.querySelector(tableDomStrings.archivedRequestsAmounBadge).innerText = number;
     }
 
-    // Ф-я для сокрытия ссылки Редактирования у заархивированного элемента
+    // A function to hide the Edit link for an archived item
     function hideEditLink() {
         const tbody = document.querySelector("tbody").querySelectorAll("[data-link]");
         tbody.forEach((item) => {
@@ -85,11 +84,11 @@ const tableView = (() => {
 
     function selectFilterValue(value) {
         let a = document.querySelector(tableDomStrings.courseFilter);
-        Array.from(a).forEach( item => {
-            if( item.value === value ) {
+        Array.from(a).forEach((item) => {
+            if (item.value === value) {
                 item.selected = true;
             }
-        })
+        });
     }
 
     return {

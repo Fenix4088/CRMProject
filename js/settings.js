@@ -1,40 +1,40 @@
 const statuses = {
     new: {
         name: "new",
-        label: "Новая",
+        label: "New",
         color: "badge-danger",
     },
     inProgress: {
         name: "inProgress",
-        label: "В Работе",
+        label: "in work",
         color: "badge-warning",
     },
     payment: {
         name: "payment",
-        label: "Ожидается оплата",
+        label: "Payment pending",
         color: "badge-warning",
     },
     finished: {
         name: "finished",
-        label: "Завершена",
+        label: "Completed",
         color: "badge-success",
     },
     denial: {
         name: "denial",
-        label: "Отказ",
+        label: "Renouncement",
         color: "badge-danger",
     },
     archived: {
         name: "archived",
-        label: "Архив",
+        label: "Archive",
         color: "badge-archived",
     },
 };
 
 const products = {
-    html: "Курс по верстке",
-    js: "Курс по JavaScript",
-    vue: "Курс по VUE JS",
-    php: "Курс по PHP",
-    wordpress: "Курс по WordPress",
+    html: "HTML/CSS course",
+    js: "JavaScript course",
+    vue: "VUE JS course",
+    php: "PHP course",
+    wordpress: "WordPress course",
 };
