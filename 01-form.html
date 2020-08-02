@@ -1,144 +1,89 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <title>01 - Form</title>
-    <link rel="stylesheet" href="libs/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/main.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i&display=swap&subset=cyrillic-ext"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&amp;subset=cyrillic-ext"
-      rel="stylesheet"
-    />
-  </head>
+    <head>
+        <meta charset="UTF-8" />
+        <title>01 - Form</title>
+        <link rel="stylesheet" href="libs/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="css/main.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+        <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i&display=swap&subset=cyrillic-ext" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&amp;subset=cyrillic-ext" rel="stylesheet" />
+    </head>
 
-  <body class="radial-bg flex-center">
-    <!-- white-plate -->
-    <div class="white-plate white-plate--payment">
-      <div class="container-fluid">
-        <!-- header -->
-        <div class="white-plate__header text-center">
-          <p class="white-plate__logo"><span>Your application</span> form</p>
+    <body class="radial-bg flex-center">
+        <!-- white-plate -->
+        <div class="white-plate white-plate--payment">
+            <div class="container-fluid">
+                <!-- header -->
+                <div class="white-plate__header text-center">
+                    <p class="white-plate__logo"><span>Your application</span> form</p>
+                </div>
+                <!-- // header -->
+
+                <div class="white-plate__line-between white-plate__line-between--main"></div>
+
+                <form id="main-form" method="POST" name="main" action="<?=HOST?>payment-form.php">
+                    <label>Your data:</label>
+                    <div class="form-group">
+                        <input data-fullname type="text" name="name" autocomplete="on" class="form-control" placeholder="Имя и Фамилия" required />
+                        <div data-warning-name class="validate">
+                            <div class="validate__icon">
+                                <img src="./img/icons/exclamation-circle.svg" alt="icon" width="20" />
+                            </div>
+                            <div class="validate__warning">Enter your first and last name</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input data-phone type="text" name="phone" autocomplete="on" class="form-control" placeholder="Телефон" required />
+                        <div data-warning-phone class="validate">
+                            <div class="validate__icon">
+                                <img src="./img/icons/exclamation-circle.svg" alt="icon" width="20" />
+                            </div>
+                            <div class="validate__warning">
+                                Enter the phone number in international format:<span class="validate__example">78799233091</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input data-email type="email" name="email" autocomplete="on" class="form-control" placeholder="Email" required />
+                        <div data-warning-email class="validate">
+                            <div class="validate__icon">
+                                <img src="./img/icons/exclamation-circle.svg" alt="icon" width="20" />
+                            </div>
+                            <div class="validate__warning">
+                                Enter your email:
+                                <span class="validate__example">info@gmail.com</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Product:</label>
+                        <select data-courses name="product" class="form-control" id="formSelect">
+                            <option value="html">HTML/CSS course</option>
+                            <option value="js">JavaScript course</option>
+                            <option value="vue">VUE JS course</option>
+                            <option value="php">PHP course</option>
+                            <option value="wordpress">WordPress course</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-lg btn-primary btn-block">
+                            Make a request
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <!-- // header -->
-
-        <div
-          class="white-plate__line-between white-plate__line-between--main"
-        ></div>
-
-        <form id="main-form" method="POST" name="main" action="<?=HOST?>payment-form.php">
-          <label>Your data:</label>
-          <div class="form-group">
-            <input
-              data-fullname
-              type="text"
-              name="name"
-              autocomplete="on"
-              class="form-control"
-              placeholder="Имя и Фамилия"
-              required
-            />
-            <div data-warning-name class="validate">
-              <div class="validate__icon">
-                <img
-                  src="./img/icons/exclamation-circle.svg"
-                  alt="icon"
-                  width="20"
-                />
-              </div>
-              <div class="validate__warning">Enter your first and last name</div>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <input
-              data-phone
-              type="text"
-              name="phone"
-              autocomplete="on"
-              class="form-control"
-              placeholder="Телефон"
-              required
-            />
-            <div data-warning-phone class="validate">
-              <div class="validate__icon">
-                <img
-                  src="./img/icons/exclamation-circle.svg"
-                  alt="icon"
-                  width="20"
-                />
-              </div>
-              <div class="validate__warning">
-                Enter the phone number in international format:<span
-                  class="validate__example"
-                  >78799233091</span
-                >
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <input
-              data-email
-              type="email"
-              name="email"
-              autocomplete="on"
-              class="form-control"
-              placeholder="Email"
-              required
-            />
-            <div data-warning-email class="validate">
-              <div class="validate__icon">
-                <img
-                  src="./img/icons/exclamation-circle.svg"
-                  alt="icon"
-                  width="20"
-                />
-              </div>
-              <div class="validate__warning">
-                Enter your email:
-                <span class="validate__example">info@gmail.com</span>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="exampleFormControlSelect1">Product:</label>
-            <select
-              data-courses
-              name="product"
-              class="form-control"
-              id="formSelect"
-            >
-              <option value="html">HTML/CSS course</option>
-              <option value="js">JavaScript course</option>
-              <option value="vue">VUE JS course</option>
-              <option value="php">PHP course</option>
-              <option value="wordpress">WordPress course</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <button type="submit" class="btn btn-lg btn-primary btn-block">
-              Make a request
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-    <!-- // white-plate -->
-    <!-- Public scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <!-- User scripts -->
-    <script src="./js/test-datas.js"></script>
-    <script src="./js/settings.js"></script>
-    <script src="./js/model.js"></script>
-    <script src="js/form.view.js"></script>
-    <script src="js/form.controller.js"></script>
-  </body>
+        <!-- // white-plate -->
+        <!-- Public scripts -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <!-- User scripts -->
+        <script src="./js/test-datas.js"></script>
+        <script src="./js/settings.js"></script>
+        <script src="./js/model.js"></script>
+        <script src="js/form.view.js"></script>
+        <script src="js/form.controller.js"></script>
+    </body>
 </html>

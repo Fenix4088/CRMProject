@@ -6,7 +6,7 @@ const statuses = {
     },
     inProgress: {
         name: "inProgress",
-        label: "in work",
+        label: "in progress",
         color: "badge-warning",
     },
     payment: {

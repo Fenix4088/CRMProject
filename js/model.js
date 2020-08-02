@@ -35,7 +35,6 @@ const model = (() => {
             courseType,
             courseName
         );
-
         // Writing customer data to the main array
         data.requestsDataBase.push(newRequest);
         // We write data on the client in LS
