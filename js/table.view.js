@@ -46,16 +46,17 @@ const tableView = (() => {
     // Adding an Active Class to a Side Filter Element
     function addActiveClass(element) {
         // ? New version
+        // Elements of both filters
         const itemDataValue = element.dataset.filter;
-        const topAndAsideFilterItems = document.querySelectorAll(`[data-filter=${itemDataValue}]`);
-        Array.from(topAndAsideFilterItems).forEach((item) => {
+        const bothFiltersElements = document.querySelectorAll(`[data-filter=${itemDataValue}]`);
+        Array.from(bothFiltersElements).forEach((item) => {
             const itemParent = item.parentElement.parentElement;
             if(itemParent.querySelector(".active")) {
                 itemParent.querySelector(".active").classList.remove("active")
             }
             item.classList.add("active");
         });
-        
+
         // * Old version
         /*
         if (filterList.querySelector(".active")) {
@@ -97,8 +98,8 @@ const tableView = (() => {
     }
 
     function selectFilterValue(value) {
-        let a = document.querySelector(tableDomStrings.courseFilter);
-        Array.from(a).forEach((item) => {
+        let filterSelect = document.querySelector(tableDomStrings.courseFilter);
+        Array.from(filterSelect).forEach((item) => {
             if (item.value === value) {
                 item.selected = true;
             }
