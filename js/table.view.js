@@ -45,11 +45,25 @@ const tableView = (() => {
 
     // Adding an Active Class to a Side Filter Element
     function addActiveClass(element) {
-        const filterList = element.parentElement.parentElement;
+        // ? New version
+        const itemDataValue = element.dataset.filter;
+        const topAndAsideFilterItems = document.querySelectorAll(`[data-filter=${itemDataValue}]`);
+        Array.from(topAndAsideFilterItems).forEach((item) => {
+            const itemParent = item.parentElement.parentElement;
+            if(itemParent.querySelector(".active")) {
+                itemParent.querySelector(".active").classList.remove("active")
+            }
+            item.classList.add("active");
+        });
+        
+        // * Old version
+        /*
         if (filterList.querySelector(".active")) {
             filterList.querySelector(".active").classList.remove("active");
         }
         element.classList.add("active");
+        const filterList = element.parentElement.parentElement;
+        */
     }
 
     // Adding the active class to the side filter after jumping from the Edit page
