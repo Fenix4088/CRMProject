@@ -45,4 +45,4 @@
 
 
 ## Ссылки
-Демо проекта - [Ссылка](https://fenix4088.github.io/BudgetCalculator/)
+Демо проекта - [Ссылка](https://fenix4088.github.io/CRMProject/)
