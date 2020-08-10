@@ -19,30 +19,29 @@ The first page is the application form. The user enters his/her name, surname:bu
 ###### :white_check_mark:Page two - All applications 
 
 Page two displays all applications for the convenient work of the project administration.:eyes: All applications can be filtered by course type and status. A new application always has the "New" status.    
-Three filters have been created to filter applications. The side and top filters filter tickets by their status. The top filter in the form of a drop-down menu filters applications by course type.  
+Three filters have been created to filter applications. The side and top filters treat the applications according to their status. The top filter in the form of a drop-down menu is to filter the applications according course type.  
 The side filter also displays the number of applications of a certain status.:fire:    
 All filters are synchronized with each other.:thumbsup:  
 All applications are displayed in the form of a table.
 
 
-###### :white_check_mark:Третья страица - Редактирования заявки
+###### :white_check_mark:Page three - Editing an application
 
-Третья страница - представляет из себя страницу редактирования заявок.:memo: Служит для изменения данных заявки администратором.  
-На этой странице администратор получает возможность изменять все данные заявки а также менять ее статус.  
-Создана возможность удалять заявки из таблици. В случаи удаления заявки она перемещаеться в архив. Весь архив можно просмотреть в пунке бокового меню фильтра под названием "Архив".  
-Все заявки которы переносяться в архив теряют возможность редактирования.
+Page three is for editing applications.:memo:It's function is to change the data in applications. It is for the administrator to change and the status of the application.    
+It is possible to delete applications from the table. When deleted, the application moves to the archive.   
+The entire archive can be viewed in the side menu of the filter in "Archive".  
+The archived applications are not editable.
 
-## Особенности
+## Features
 
-Страница написана по стандарту W3С с использованием HTML5, CSS3, JavaScript ES6+, модули созданы на основе стандарта ES5.  
-Код струкурирован согласно MVC модели.  
-
-
-## :fire:Важно:fire:
-Для коректного отображения использовать только Chrome браузер.  
-Проект не поддерживает мобильную адаптацию.  
-В папке js есть файл test-datas.js он нужен для генерирования случайных заявок, это намного упростит и ускорит тестирования проекта. При необхоимости его можно отключить.
+The page is written according to the W3C standard using HTML5, CSS3, JavaScript ES6 +, the modules are based on the ES5 standard.  
+Code structured according to MVC model.  
 
 
-## Ссылки
-Демо проекта - [Ссылка](https://fenix4088.github.io/CRMProject/):point_left:
+## :fire:Important:fire:
+The project does not support mobile adaptation.    
+There is a test-datas.js file in the js folder, it is needed to generate random requests, this will greatly simplify and speed up project testing. If necessary, you can turn it off.
+
+
+## Links
+Project demo - [Link](https://fenix4088.github.io/CRMProject/):point_left:
