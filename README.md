@@ -1,28 +1,28 @@
 # CRM Project
 
 
-## Технологии
+## Technology
 - HTML5/CSS3
 - JavaScript
 - Bootstrap
 - JQuery
 
-## Описание
+## Description
 
-Этот проект представляет из себя CRM систему для онлайн школы веб разработки. :mortar_board: Система предназначена для подачи заявки пользователем и дает возможность администратору управлять, редактировать и удалять нужные заявки.:black_nib:  
+This project is a CRM system for an online school of web development. :mortar_board: The system is intended for the submission of an application by the user and allows the administrator to manage, edit and delete the required applications.:black_nib:  
 
-######  :white_check_mark:Первая страница - Форма
+######  :white_check_mark:Page one - Form
 
-Первая страница являеться формой подачи заявки. Пользователь вводит свое имя, фамилию:busts_in_silhouette:, номер телефона:telephone:, email:e-mail: и может выбирать курс по которому он хочет обучаться. На странице представлено всего пять типов курсов связаных с веб разработкой.  
-:heavy_exclamation_mark:Ссылка в нижней части формы "Show all applications" нужна только для удобной демонстрации проекта.:heavy_exclamation_mark:
+The first page is the application form. The user enters his/her name, surname:busts_in_silhouette:, phone number:telephone:, email:e-mail: and can choose the course he/she wants to do. There are five types of courses related to web development on the page.
+:heavy_exclamation_mark: "Show all applications" link at the bottom of the form provides a convenien demonstration of the project.:heavy_exclamation_mark:
 
-###### :white_check_mark:Вторая страница - Все заявки 
+###### :white_check_mark:Page two - All applications 
 
-Вторая страница - отображает все заявки, для удобной работы администрации проекта.:eyes: Все заявки можно фильтровать по типу курса и по статусу. Новая заявка всегда имеет статус "Новая".  
-Для фильтрации заявок созданы три фильтра. Боковой и верхний фильтр фильтруют заявки по их статусу. Верхний фильтр в виде выпадающего меню фильтрует заявки по типу курса.  
-Боковой фильтр также отображает количество заявок определенного статуса.:fire:    
-Все фильтры синхронизированы между собой.:thumbsup:  
-Все заявки отображаются в виде таблици.
+Page two displays all applications for the convenient work of the project administration.:eyes: All applications can be filtered by course type and status. A new application always has the "New" status.    
+Three filters have been created to filter applications. The side and top filters filter tickets by their status. The top filter in the form of a drop-down menu filters applications by course type.  
+The side filter also displays the number of applications of a certain status.:fire:    
+All filters are synchronized with each other.:thumbsup:  
+All applications are displayed in the form of a table.
 
 
 ###### :white_check_mark:Третья страица - Редактирования заявки
